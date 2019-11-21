@@ -1,0 +1,48 @@
+﻿body
+{
+}
+
+li {
+    display: inline;
+    
+}
+
+.selected {
+    background-color: blue;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border-color: black !important;
+    border: solid;
+    outline: none;
+    margin-right: 5px;
+    width: 16%;
+    min-width:115px;
+}
+
+.unselected {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: white;
+    border: solid;
+    margin-right: 5px;
+    outline: none;
+    width: 16%;
+    min-width: 115px;
+}
+
+.divselect{
+    display:block;
+}
+
+.divunselect{
+    display:none;
+}
+
+ul{
+    margin-left:-40px;
+}
+
+button:hover {
+    cursor: pointer;
+}

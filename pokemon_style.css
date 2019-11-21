@@ -1,0 +1,80 @@
+div.menu {
+	width:70%;
+	background-color: lightgrey;
+	margin: auto;
+	overflow: hidden;
+}
+
+div.menu_element {
+	float: left;
+	margin-left: 10%;
+}
+
+div.wrap {
+	width: 70%;
+	border: 1px solid grey;
+	overflow: hidden;
+	margin: auto;
+	margin-top: 10px;
+}
+
+div.pokedex-desc {
+	width: 75%;
+	float: left;
+	margin: auto;
+	padding: 5px;
+}
+
+div.poke-blurb {
+	margin: auto;
+	border: 2px solid;
+	float: right;
+}
+
+img.poke {
+	border: 1px solid green;
+}
+
+div.movelist {
+	margin: auto;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table, td, th {
+	border: 1px solid;
+}
+
+.grass {
+	background-color: #00BF55;
+	color: white;
+}
+
+
+.poison {
+	background-color: purple;
+	color: white;
+}
+
+.normal {
+	background-color: grey;
+	color: white;
+}
+
+.status {
+	background-color: grey;
+	color: white;
+}
+
+.physical {
+	background-color: red;
+	color: yellow;
+}
+
+.special {
+	background-color: black;
+	color: white;
+}
+
