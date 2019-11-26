@@ -133,7 +133,7 @@ function check(num) {
             }
         }
 
-        if (!/^[1-9]+$/.test(nat_num)) {
+        if (!/^[0-9]+$/.test(nat_num)) {
             alert("National Number must be non-negative");
             return false;
         }
@@ -153,7 +153,7 @@ function check(num) {
             }
         }
 
-        if (!/^[1-9]+$/.test(gen)) {
+        if (!/^[0-9]+$/.test(gen)) {
             alert("Generation must be non-negative");
             return false;
         }
