@@ -1,4 +1,18 @@
 // JavaScript source code
+function allLetter(inputtxt) {
+    var letters = /^[A-Za-z]+$/;
+    
+
+    if (inputtxt.value.match(letters)) {
+
+        return true;
+    }
+    else {
+
+        return false;
+    }
+}
+
 function select(num) {
     var pokemon = document.getElementById("pokemon");
     var pokdiv = document.getElementById("pokediv");
@@ -97,3 +111,66 @@ function select(num) {
     }
 
 }
+
+
+function check(num) {
+    var name;
+    if (num == 0) {
+        name = document.forms["form0"]["name"].value;
+        var nat_num = document.forms["form0"]["nat_num"].value;
+        var form = document.forms["form0"]["poke_form"].value;
+
+        if ((name == "") || (form == "") || (nat_num == "")) {
+            alert("Each criteria must be filled");
+            return false;
+        }
+
+        if (form != "") {
+
+            if (!/^[a-zA-Z]+$/.test(form)) {
+                alert("Form of Pokemon must be only characters");
+                return false;
+            }
+        }
+
+        if (!/^[1-9]+$/.test(nat_num)) {
+            alert("National Number must be non-negative");
+            return false;
+        }
+
+    } else if (num == 1) {
+        name = document.forms["form1"]["name"].value;
+        var gen = document.forms["form1"]["gen"].value;
+        if ((name == "") || (gen == "")) {
+            alert("Each criteria must be filled");
+            return false;
+        }
+
+        if (name != "") {
+            if (!/^[a-zA-Z]+$/.test(name)) {
+                alert("Name of Region must only be characters");
+                return false;
+            }
+        }
+
+        if (!/^[1-9]+$/.test(gen)) {
+            alert("Generation must be non-negative");
+            return false;
+        }
+    } else if (num == 2) {
+        var type = document.forms["form2"]["type"].value;
+        if ((type == "")) {
+            alert("Each criteria must be filled");
+            return false;
+        }
+
+        if (!/^[a-zA-Z]+$/.test(type)) {
+            alert("Name of Type must only be characters");
+            return false;
+        }
+
+    }
+
+    return true;
+}
+
