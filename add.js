@@ -169,6 +169,20 @@ function check(num) {
             return false;
         }
 
+    } else if (num == 3) {
+        name = document.forms["form3"]["name"].value;
+        if (name == "") {
+            alert("Each Criteria must be filled");
+            return false;
+        }
+
+
+    } else if (num == 4) {
+        name = document.forms["form4"]["name"].value;
+        if (name == "") {
+            alert("Name of Ability must be filled");
+            return false;
+        }
     }
 
     return true;
