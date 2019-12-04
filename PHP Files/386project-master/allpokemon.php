@@ -1,7 +1,7 @@
 ﻿<html>
 <head>
 
-<title>Bootstrap Example</title>
+<title>All Pokemon</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -56,6 +56,8 @@ h4 {
 
 
 
+
+
     <div class="container">
 
         <div class="jumbotron">
@@ -82,6 +84,8 @@ h4 {
             <input type="submit" value="Go">
         </form>
 
+
+
         <div class="row">
             <div class="col-12">
                 <table class="table table-image">
@@ -94,22 +98,27 @@ h4 {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td class="w-25">
-                                <img src="https://cdn.bulbagarden.net/upload/e/ec/001MS.png" class="img-fluid img-thumbnail img_scale" alt="Sheep">
-                            </td>
-                            <td><a href="viewpokemon.php">Bulbasaur</a></td>
-                            <td>Grass</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td class="w-25">
-                                <img src="https://cdn.bulbagarden.net/upload/b/bb/004MS.png" class="img-fluid img-thumbnail img_scale" alt="Sheep">
-                            </td>
-                            <td><a href="#">Charmander</a></td>
-                            <td>Fire</td>
-                        </tr>
+			<?php 
+		if($connection = @mysqli_connect('localhost','lmartin9', 'Ballislife93!', 'PokemonDB')){
+		} else {
+        	print "No Connection";
+		}
+  
+
+		$query = "SELECT nat_num, name FROM Pokemon";
+
+		$r = mysqli_query($connection, $query);
+
+                        while($row=mysqli_fetch_array($r)){
+                                echo "<tr>";
+                                echo "<td scope='row'>" . $row['nat_num'] . "</td>";
+				echo "<td> noone </td>";
+				echo "<td>" . $row['name'] . "</td>";
+				echo "<td> none </td>"; 
+				echo "</tr>";
+			} 
+			mysqli_close($connection);
+				?>
                     </tbody>
                 </table>
             </div>

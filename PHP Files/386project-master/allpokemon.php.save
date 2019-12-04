@@ -1,7 +1,7 @@
 ﻿<html>
 <head>
 
-<title>Bootstrap Example</title>
+<title>All Pokemon</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -55,12 +55,21 @@ h4 {
 
 
 
+<?php 
+if($connection = @mysqli_connect('localhost','lmartin9', 'Ballislife93!', 'PokemonDB')){
 
-    <div class="container">
+} else {
+	print "No Connection";
+}
+
+$query = "SELECT nat_num name  FROM Pokemon";
+$r = mysqli_query($connection, $query);
+
+echo "    <div class="container">
 
         <div class="jumbotron">
-            <a href="index.html">Back to Menu</a>
-            <a href="addpokemon.html" style="float:right">Add Pokemon</a>
+            <a href="index.php">Back to Menu</a>
+            <a href="addpokemon.php" style="float:right">Add Pokemon</a>
             <h1>List of Pokemon</h1>
             <p>Below is a high level overview of the Pokemon in our database. To see more detailed information, links area provided in each row.</p>
         </div>
@@ -81,7 +90,7 @@ h4 {
             </select>
             <input type="submit" value="Go">
         </form>
-
+";
         <div class="row">
             <div class="col-12">
                 <table class="table table-image">
@@ -99,7 +108,7 @@ h4 {
                             <td class="w-25">
                                 <img src="https://cdn.bulbagarden.net/upload/e/ec/001MS.png" class="img-fluid img-thumbnail img_scale" alt="Sheep">
                             </td>
-                            <td><a href="viewpokemon.html">Bulbasaur</a></td>
+                            <td><a href="viewpokemon.php">Bulbasaur</a></td>
                             <td>Grass</td>
                         </tr>
                         <tr>

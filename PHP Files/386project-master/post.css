@@ -1,0 +1,25 @@
+.postbox{
+ 
+  border: solid;
+  width: 35%;
+  height: 250px; 
+  margin-left: 25%;
+  position:relative;
+}
+
+.link{
+ position:absolute;
+
+}
+
+#right{
+bottom:3;
+right:3;
+  
+}
+
+
+#left{
+bottom:3;
+left:3;
+}

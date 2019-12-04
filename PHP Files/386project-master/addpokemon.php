@@ -28,7 +28,7 @@
         <li style="text-align:center"><button id="ability" class="unselected" onclick="select(4)">New Ability</button></li>
     </ul>
     <div id="pokediv" class=" div_select">
-        <form name="form0" action="index.php"  method="post">
+        <form name="form0" action="postpokemon.php"  method="post">
             <!-- this php file will take us back home :) -->
 
 
