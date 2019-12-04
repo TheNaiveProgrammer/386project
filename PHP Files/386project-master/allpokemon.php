@@ -49,13 +49,20 @@ h4 {
 
 </style>
 
+
 </head>
 
 <body class="">
 
 
 
-
+	<?php 
+		if($connection = @mysqli_connect('localhost','lmartin9', 'Ballislife93!', 'PokemonDB')){
+		} else {
+        	print "No Connection";
+		}
+		
+		?>
 
 
     <div class="container">
@@ -67,21 +74,17 @@ h4 {
             <p>Below is a high level overview of the Pokemon in our database. To see more detailed information, links area provided in each row.</p>
         </div>
 
-        Sort By: <select>
-            <option value="name">Number</option>
-            <option value="name">Name</option>
-            <option value="type">Type</option>
-        </select>
-        <form style="margin-left:150px;display:inline-block">
+    
+        <form action="allpokemon.php" method="post" name ="s" id="search" style="margin-left:100px;display:inline-block">
 
-            <input type="text" placeholder="Search..." style="margin-left:5px;">
+            <input type="text" placeholder="Search..." name="search_text" style="margin-left:5px;">
             By
-            <select>
+            <select name="searchlist" form="search" >
                 <option value="name">Name</option>
-                <option value="type">Number</option>
-                <option value="base_power">Type</option>
+                <option value="nat_num">Number</option>
+               
             </select>
-            <input type="submit" value="Go">
+            <input type="submit"  name="search" value="Go">
         </form>
 
 
@@ -99,14 +102,14 @@ h4 {
                     </thead>
                     <tbody>
 			<?php 
-		if($connection = @mysqli_connect('localhost','lmartin9', 'Ballislife93!', 'PokemonDB')){
-		} else {
-        	print "No Connection";
-		}
-  
-
-		$query = "SELECT nat_num, name FROM Pokemon";
-
+		
+  if(isset($_POST['search'])){
+	    	    
+	   $query = "SELECT nat_num, name FROM Pokemon WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['search_text'] . "%' ORDER BY nat_num";
+	}else {
+	      $query = "SELECT nat_num, name FROM Pokemon ORDER BY nat_num;" ;
+	      print "StART ONLY";
+	  }
 		$r = mysqli_query($connection, $query);
 
                         while($row=mysqli_fetch_array($r)){
