@@ -80,8 +80,8 @@ h4 {
             <input type="text" placeholder="Search..." name="search_text" style="margin-left:5px;">
             By
             <select name="searchlist" form="search" >
-                <option value="name">Name</option>
-                <option value="nat_num">Number</option>
+                <option value="name" <?php if($_POST['searchlist'] == 'name') echo ' selected="selected"'; ?>>Name</option>
+                <option value="nat_num" <?php if($_POST['searchlist'] == 'nat_num') echo ' selected="selected"'; ?>>Number</option>
                
             </select>
             <input type="submit"  name="search" value="Go">
@@ -115,7 +115,7 @@ h4 {
                         while($row=mysqli_fetch_array($r)){
                                 echo "<tr>";
                                 echo "<td scope='row'>" . $row['nat_num'] . "</td>";
-				echo "<td> noone </td>";
+				echo "<td> none </td>";
 				echo "<td>" . $row['name'] . "</td>";
 				echo "<td> none </td>"; 
 				echo "</tr>";
