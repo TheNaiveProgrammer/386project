@@ -111,14 +111,14 @@ h4 {
 	      print "StART ONLY";
 	  }
 		$r = mysqli_query($connection, $query);
-
+			
                         while($row=mysqli_fetch_array($r)){
-                                echo "<tr>";
+                                echo "<tr><form action=viewpokemon.php method=post>";
                                 echo "<td scope='row'>" . $row['nat_num'] . "</td>";
 				echo "<td> none </td>";
-				echo "<td>" . $row['name'] . "</td>";
+				echo "<td><input type=submit value=" . $row['name'] . "></td>";
 				echo "<td> none </td>"; 
-				echo "</tr>";
+				echo "<input type=hidden name=poke id=poke value=".$row['name'] ."></form></tr>";
 			} 
 			mysqli_close($connection);
 				?>

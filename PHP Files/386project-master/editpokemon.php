@@ -16,9 +16,10 @@
 	</div>
 
 	<div class="wrap">
-	<form action="" method="post">
+	<form action="postedit.php" method="post">
 		<span>Name: <input type="text" name="pokename" value="Bulbasaur"></span><br><br>
 		<span>National Number: <input type="text" name="natnum" value="001"></span><br><br>
+		<span>Species name: <input type="text" name="species" value="Seed Pokemon"></span><br><br>
 		<span>Types: 
 			<select name="primarytype">
 				<option value="normal">Normal</option>

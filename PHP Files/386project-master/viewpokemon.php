@@ -19,16 +19,24 @@
 	</div>
 
 	<div class="wrap">
+		<?php
+		if($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB')) { }
+		else {
+			echo "No connection";
+		}
+		$query = "select * from Pokemon where name='".($_POST['poke'])."';";
+		$result = mysqli_query($connection, $query);
+		echo '<div class="pokedex-desc">';
+		echo '<h3> Pokedex Description </h3>';
+		$r = mysqli_fetch_array($result);
+		echo "<p>" . $r['pokedex_desc'] . "</p>";
+		echo '</div>';
 		
-		<div class="pokedex-desc">
-		<h3> Pokedex Description </h3>
-		<p>Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun's rays, the seed grows progressively larger. </p>
-		</div>
-
-		<div class="poke-blurb">
-		<img src="Bulbasaur-main.jpg" class="poke">
-		<br>
-		<h3 style="margin: auto"> Bulbasaur #001 </h3>
+		echo "<div class='poke-blurb'>";
+		echo '<img src="'. $r['name'] .'.jpg" class="poke">';
+		echo '<br>';
+		echo '<h3 style="margin: auto">' .$r['name'] . ' #'. $r['nat_num'] . '</h3>'
+		?>
 		<span>Type: </span><span class="grass">Grass</span><span class="poison">Poison</span><br>
 		<p>Abilities: Overgrow</p>
 		<p>Hidden Abilities: Chlorophyll</p>
