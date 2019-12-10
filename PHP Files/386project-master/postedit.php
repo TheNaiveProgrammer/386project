@@ -11,7 +11,7 @@ if($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB')) 
 
 $_POST['dexentry'] = addslashes($_POST['dexentry']);
 
-$query = 'insert into Pokemon(nat_num, name, gender_ratio, species_name, pokedex_desc, catch_rate, height, weight) values (' . $_POST['natnum'] .', \''. $_POST['pokename'] . '\', \'' . $_POST['male'] . '-' . $_POST['female'] . '\', \'' . $_POST['species'] . '\', \''. $_POST['dexentry'] . '\', '. $_POST['cr'] . ', \''. $_POST['height'] . '\', \'' . $_POST['weight'] . '\');';
+$query = 'update Pokemon set '.'name = \''. $_POST['pokename'] . '\', gender_ratio = \'' . $_POST['male'] . '-' . $_POST['female'] . '\', species_name = \'' . $_POST['species'] . '\', pokedex_desc = \''. $_POST['dexentry'] . '\', catch_rate = '. $_POST['cr'] . ', height = \''. $_POST['height'] . '\', weight = \'' . $_POST['weight'] . '\' where nat_num = '.$_POST['natnum'].';';
 print $query;
 mysqli_query($connection, $query);
 mysqli_close($connection);

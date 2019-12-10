@@ -35,85 +35,64 @@
 		echo "<div class='poke-blurb'>";
 		echo '<img src="'. $r['name'] .'.jpg" class="poke">';
 		echo '<br>';
-		echo '<h3 style="margin: auto">' .$r['name'] . ' #'. $r['nat_num'] . '</h3>'
-		?>
-		<span>Type: </span><span class="grass">Grass</span><span class="poison">Poison</span><br>
-		<p>Abilities: Overgrow</p>
-		<p>Hidden Abilities: Chlorophyll</p>
-		<p>Catch Rate: 45</p>
-		<p>Height: 0.7m | Weight: 6.9kg</p>
-		<span>Gender ratio: </span><span style="color: blue">87.5%</span>|<span style="color: pink">12.5%</span>
-		<p><a href="editpokemon.php">Edit this Pokemon</a></p>
-		</div>
+		echo '<h3 style="margin: auto">' .$r['name'] . ' #'. $r['nat_num'] . '</h3>';
+		$query = "select type from IsType where nat_num = " . $r['nat_num'] . ";";
+		$types = mysqli_query($connection, $query);
+		echo '<span>Type: </span>';
+		while ($row = mysqli_fetch_array($types))
+			echo '<span class="'.strtolower($row['type']).'">'.$row['type'].'</span>';
+		echo '<br>';
+		echo '<p>Abilities: ';
+		$query = 'select ability_name from Norm_Ability where nat_num = '. $r['nat_num'].';';
+		$ability = mysqli_query($connection, $query);
+		if ($row = mysqli_fetch_array($ability))
+			echo $row['ability_name'];
+		if ($row = mysqli_fetch_array($ability))
+			echo ', ' . $row['ability_name'];
+		echo '</p>';
+		echo '<p>Hidden Abilities: ';
+		$query = 'select ability_name from Hidden_Ability where nat_num = ' . $r['nat_num'] . ';';
+		$ability = mysqli_query($connection, $query);
+		if ($row = mysqli_fetch_array($ability))
+			echo $row['ability_name'];
+		else
+			echo 'None';
+		echo '</p>';
+		echo '<p>Catch Rate: '.$r['catch_rate'].'</p>';
+		echo '<p>Height: '.$r['height'].'m | Weight: '.$r['weight'].'kg</p>';
+		echo '<span>Gender ratio: '.$r['gender_ratio'].'</span>';
+		echo '<form action=editpokemon.php method=POST>';
+		echo '<input name="num" type=hidden value="'. $r['nat_num'] .'">';
+		echo '<input type=submit value="Edit this Pokemon">';
+		echo '</form>';
+		echo '</div>';
 		
-		<div class="movelist">
-			<center>
+		
+		echo '<div class="movelist">';
+			echo '<center>';
 			
-			<table class="moves">
-                <caption><h3>Moveset</h3></caption>
-				<tr>
-					<th>Name</th>
-					<th>Type</th>
-					<th>Category</th>
-				</tr>
-				<tr>
-					<td>Tackle</td>
-					<td class="normal">Normal</td>
-					<td class="physical">Physical</td>
-				</tr>
-				<tr>
-					<td>Growl</td>
-                                        <td class="normal">Normal</td>
-					<td class="status">Status</td>
-				</tr>
-					<td>Leech Seed</td>                                                  
-                                        <td class="grass">Grass</td>                                                            
-                                        <td class="status">Status</td>
-				</tr>
-				<tr>
-					<td>Vine Whip</td>
-                                        <td class="grass">Grass</td>                                                            
-                                        <td class="physical">Physical</td>
-				</tr>
-				<tr>
-					<td>Poison Powder</td>                         
-                                        <td class="poison">Poison</td>                                                            
-                                        <td class="status">Status</td>
-				</tr>
-					<td>Sleep Powder</td>
-					<td class="grass">Grass</td>
-					<td class="status">Status</td>
-				</tr>
-				<tr>
-					<td>Razor Leaf</td>
-					<td class=grass>Grass</td>
-					<td class=physical>Physical</td>
-				</tr>
-				<tr>
-					<td>Take Down</td>
-					<td class=normal>Normal</td>
-					<td class=physical>Physical</td>
-				</tr>
-				<tr>
-					<td>Sweet Scent</td>
-					<td class=normal>Normal</td>
-					<td class=status>Status</td>
-				</tr>
-				<tr>
-					<td>Growth</td>
-					<td class=normal>Normal</td>
-					<td class=status>Status</td>
-				</tr>
-				<tr>
-					<td>Double-Edge</td>
-					<td class=normal>Normal</td>
-					<td class=status>Status</td>
-				</tr>
-				<tr>
-					<td>Solar Beam</td>
-					<td class=grass>Grass</td>
-					<td class=special>Special</td>
-				</tr>
+			echo '<table class="moves">';
+			echo '<caption><h3>Moveset</h3></caption>';
+			echo '<tr>';
+			echo '<th>Name</th>';
+			echo '<th>Type</th>';
+			echo '<th>Category</th>';
+			echo '</tr>';
+
+			$query = 'select name, attack_mode, movetype from Moves, (select * from Can_Learn where nat_num='. $r['nat_num'] .') as L where name = L.move_name;';
+			$moves = mysqli_query($connection, $query);
+			while ($m = mysqli_fetch_array($moves))
+			{
+				$t = $m['movetype'];
+				$a = $m['attack_mode'];
+
+				echo '<tr>';
+				echo '<td class="">'.$m['name'] .'</td>';
+				echo '<td class="'.strtolower($t).'">'.$t.'</td>';
+				echo '<td class="'.strtolower($a).'">'.$a.'</td>';
+				echo '</tr>';
+			}
+			?>
 			</table>
 			</center>
 		</div>
