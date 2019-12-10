@@ -5,10 +5,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+   <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
+
 <style>
+
+.button {
+  background: none!important;
+  border: none;
+  padding: 0!important;
+  /*optional*/
+  font-family: arial, sans-serif;
+  /*input has OS specific font-family*/
+  color: #069;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
     td {
         text-align: center;
     }
@@ -51,6 +66,20 @@ h4 {
 
 
 </head>
+<main class="main">
+  <aside class="sidebar">
+    <nav class="nav">
+      <ul>
+        <li class="active"><a href="allpokemon.html">Pokemon</a></li>
+        <li><a href="allregions.html">Regions</a></li>
+        <li><a href="allmoves.html">Moves</a></li>
+        <li><a href="allabilities.html">Abilities</a></li>
+		<li><a href="alltypes.html">Types</a></li>
+        <li><a href="#">News</a></li>
+      </ul>
+    </nav>
+  </aside>
+</main>
 
 <body class="">
 
@@ -108,17 +137,17 @@ h4 {
 	   $query = "SELECT nat_num, name FROM Pokemon WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['search_text'] . "%' ORDER BY nat_num";
 	}else {
 	      $query = "SELECT nat_num, name FROM Pokemon ORDER BY nat_num;" ;
-	      print "StART ONLY";
+	     
 	  }
 		$r = mysqli_query($connection, $query);
 			
                         while($row=mysqli_fetch_array($r)){
-                                echo "<tr><form action=viewpokemon.php method=post>";
+                                echo "<tr><form action='viewpokemon.php' method='post'>";
                                 echo "<td scope='row'>" . $row['nat_num'] . "</td>";
 				echo "<td> none </td>";
-				echo "<td><input type=submit value=" . $row['name'] . "></td>";
+				echo "<td><input type='submit' class='button' value=" . $row['name'] . "></td>";
 				echo "<td> none </td>"; 
-				echo "<input type=hidden name=poke id=poke value=".$row['name'] ."></form></tr>";
+				echo "<input type='hidden' name='poke' id='poke' value=".$row['name'] ."></form></tr>";
 			} 
 			mysqli_close($connection);
 				?>
