@@ -1,7 +1,6 @@
- 
 <html>
 <head>
-<title> Post Pokemon</title>
+<title> Post Move</title>
 <link href="index.css" rel="stylesheet" type="text/css" />
 <link href="post.css" rel="stylesheet" type="text/css" />
 </head>
@@ -29,22 +28,10 @@ if($connection = @mysqli_connect('localhost','lmartin9', 'Ballislife93!', 'Pokem
 		}
 		
 		
-		$query = "INSERT INTO Pokemon(nat_num, name) VALUES (". $_POST["nat_num"] . ", '" . $_POST["name"] . "');";
+		$query = "INSERT INTO Moves(name,movetype,base_power,attack_mode) VALUES ('" . $_POST["name"] . "', '" . $_POST["type"]. "', " . $_POST["power"] . ", '". $_POST["attack_mode"] . "');";
 		  		//print $query;
-		  		
-	
+
 		if(mysqli_query($connection, $query)){
-		$type_query = "INSERT INTO IsType(nat_num, type) VALUES (" . $_POST["nat_num"] . ", '" . $_POST["type"] . "');";
-		
-		print $type_query;	
-		mysqli_query($connection,$type_query);
-		if($_POST['type2']!='NULL'){
-		  $type_query2 = "INSERT INTO IsType(nat_num, type) VALUES (" . $_POST["nat_num"] . ", '" . $_POST["type2"] . "');";
-		
-		
-		mysqli_query($connection,$type_query2);
-		}
-	
 		echo "<div class='postbox'> <p style='text-align: center; vertical-align:middle;line-height:250px;'>" . $_POST["name"] . " was added!</p>";
 		echo "<br><br>";
 		echo "<a class='link' id = 'left' href='addpokemon.php'>Add Another</a>";
