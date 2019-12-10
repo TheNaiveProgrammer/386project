@@ -25,6 +25,7 @@
 		$r = mysqli_fetch_array($result);
 		echo '<span>Name: <input type="text" name="pokename" value="'.$r['name'].'"></span><br><br>';
 		echo '<span>National Number: '.$r['nat_num'].'</span><br><br>';
+		echo '<input type=hidden name=natnum value='.$r['nat_num'].'>';
 		echo '<span>Species name: <input type="text" name="species" value="'.$r['species_name'].'"></span><br><br>';
 		echo '<span>Types: ';
 	
@@ -51,41 +52,72 @@
 		}
 			
 		echo '</select>';
-		?>
-			<select name="secondarytype">
-                                <option value="normal">Normal</option>
-                                <option value="fire">Fire</option>
-                                <option value="water">Water</option>
-                                <option value="grass">Grass</option>
-                                <option value="electric">Electric</option>
-                                <option value="psychic">Psychic</option>
-                                <option value="ice">Ice</option>
-                                <option value="dragon">Dragon</option>
-                                <option value="dark">Dark</option>
-                                <option value="fairy">Fairy</option>
-                                <option value="fighting">Fighting</option>
-                                <option value="flying">Flying</option>
-                                <option value="poison" selected="selected">Poison</option>
-                                <option value="ground">Ground</option>
-                                <option value="rock">Rock</option>
-                                <option value="bug">Bug</option>
-                                <option value="ghost">Ghost</option>
-                                <option value="steel">Steel</option>
-				<option value="null">None</option>
-			</select>
-		</span><br><br>
+		
+		echo '<select name="secondarytype">';
+		$query = 'select name from Types';
+		$types = mysqli_query($connection, $query);
+		while ($t = mysqli_fetch_array($types))
+		{
+			echo '<option value="'.strtolower($t['name']).'"';
+			if (strcmp($t['name'], $sec_type)==0)
+			{
+				echo ' selected="selected"';
+			}
+			echo '>'.$t['name'].'</option>';
+		}
+
+		echo '<option value="null"';
+		if ($sec_type == '')
+			echo ' selected="selected"';
+		echo '>Null</option>';
+		echo '</select>';
+		echo '</span><br><br>';
+		
 		
 
-		<span>Height: <input type=text name=height value="0.7">m</span><br><br>
-		<span>Weight: <input type=text name=weight value="6.9">kg<span><br><br>
-		<span>Catch Rate: <input type=text name=cr value=45></span><br><br>
-		<span>Gender Ratio (M|F): <input type=text name=male value="87.5"> <input type=text name=female value="12.5"></span><br><br>
-		<span>Abilities: <input type=text name=primaryability value=Overgrow> <input type=text name=secondaryability value=NULL></span><br><br>
-		<span>Hidden Ability: <input type=text name=hiddenability value=Chlorophyll></span><br><br>
-		<span>Pokedex Entry: <br> <textarea rows=5 cols=40 name=dexentry>Bulbasaur can be seen napping in bright sunlight. There is a seed on its back. By soaking up the sun's rays, the seed grows progressively larger.</textarea></span><br><br>
-		<input type=submit value=Submit>
-	</form><br><br>
-	<a href="viewpokemon.php">Go Back</a>
+		echo '<span>Height: <input type=text name=height value="'.$r['height'].'">m</span><br><br>';
+		echo '<span>Weight: <input type=text name=weight value="'.$r['weight'].'">kg<span><br><br>';
+		echo '<span>Catch Rate: <input type=text name=cr value=';
+		if ($r['catch_rate'])
+			echo $r['catch_rate'];
+		else
+			echo '0';
+		echo '></span><br><br>';
+		$gender = explode('-', $r['gender_ratio']);
+		echo '<span>Gender Ratio (M|F): <input type=text name=male value="'.$gender[0].'"> <input type=text name=female value="'.$gender[1].'"></span><br><br>';
+
+		$query = 'select ability_name from Norm_Ability where nat_num = '.$r['nat_num'].';';
+		echo '<span>Abilities: ';
+		$abilities = mysqli_query($connection, $query);
+		echo '<input type=text name=primaryability value="';
+		if ($a = mysqli_fetch_array($abilities))
+			echo $a['ability_name'];
+		else
+			echo 'NULL';
+		echo '">';
+		echo '<input type=text name=secondaryability value="';
+		if ($a = mysqli_fetch_array($abilities))
+			echo $a['ability_name'];
+		else
+			echo 'NULL';
+		echo '">';
+		echo '</span><br><br>';
+		echo '<span>Hidden Ability: ';
+		echo '<input type=text name=hiddenability value="';
+		$query = 'select ability_name from Hidden_Ability where nat_num = '.$r['nat_num'].';';
+		$abilities = mysqli_query($connection, $query);
+		if ($a = mysqli_fetch_array($abilities))
+			echo $a['ability_name'];
+		else
+			echo 'NULL';
+		echo '"></span><br><br>';
+		echo '<span>Pokedex Entry: <br> <textarea rows=5 cols=40 name=dexentry>';
+		echo $r['pokedex_desc'];
+		echo '</textarea></span><br><br>';
+		echo '<input type=submit value=Submit>';
+	echo '</form><br><br>';
+	
+	?>
 	
 	</div>
 </body>
