@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8" />
     <link href="index.css" rel="stylesheet" type="text/css" /> 
+        <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
+
     <script src="index.js"> </script>
     <title>Index</title>
 </head>
@@ -54,11 +56,37 @@
     <br /><br />
 
     <div id="second">
+    <?php 
+    if($connection = @mysqli_connect('localhost','lmartin9', 'Ballislife93!', 'PokemonDB')){
+		//print "Connection";
+		} else {
+        	print "No Connection";
+		}
+		
+		$query = "SELECT * FROM Pokemon ORDER BY RAND();";
+		$r = mysqli_query($connection, $query);
+		$row=mysqli_fetch_array($r);
+		
+		$type_query="SELECT type FROM IsType WHERE nat_num = " . $row['nat_num'] . ";";
+		$r2 = mysqli_query($connection, $type_query);
+		
+		
+		$ability_query = "SELECT ability_name from Norm_Ability WHERE nat_num = " . $row['nat_num'] . ";";
+		$r3 = mysqli_query($connection, $ability_query);
+		//print $type_query;
+		
+    ?>
         <h3 style="text-align:center">Random Pokemon!</h3>
-        <p>Name: Charmander</p>
-        <p>Type: Fire</p>
-        <p>Abilities: Flash Fire</p>
-        <p>Region: Kanto</p>
+        <p>Name: <?php echo $row['name'];  ?></p>
+        <p>Number: <?php echo $row['nat_num']; ?> </p>
+        <p>Type: <?php while($row2=mysqli_fetch_array($r2)){
+		      echo $row2['type'] . " ";
+		  }?>
+        </p>
+        <p>Abilities:  <?php while($row3=mysqli_fetch_array($r3)){
+		      echo $row3['ability_name'] . " ";
+		  }?> </p>
+        <?php mysqli_close($connection); ?>
     </div>
     <div id="third">
         <h3 style="text-align:center">Contact Us</h3>

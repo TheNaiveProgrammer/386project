@@ -11,6 +11,19 @@
 </head>
 
 <body>
+<?php
+if($connection = @mysqli_connect('localhost','lmartin9', 'Ballislife93!', 'PokemonDB')){
+		//print "Connection";
+		} else {
+        	print "No Connection";
+		}
+		
+		$query = "SELECT name FROM Types ORDER BY name;";
+		$r = mysqli_query($connection, $query);
+		$r2 = mysqli_query($connection, $query);
+		$r3 = mysqli_query($connection, $query);
+		
+		?>
     <a href="index.php"> Back to Menu </a>
 
     <br>
@@ -44,7 +57,25 @@
             <br>
             <br>
             <br>
-       
+            
+                        <span>Type:<br><select name="type"><?php 
+            while($row2=mysqli_fetch_array($r2)){ 
+            echo "<option value='" . $row2['name'] . "'>" . $row2['name'] . "</option>" ;
+            } ?></select>  </span>
+            
+            <br>
+            <br>
+            <br>
+            
+         <span>Secondary Type:<br><select name="type2"><option value="NULL">Null</option>
+         <?php 
+            while($row3=mysqli_fetch_array($r3)){ 
+            echo "<option value='" . $row3['name'] . "'>" . $row3['name'] . "</option>" ;
+            } ?></select>  </span>
+            
+            <br>
+            <br>
+            <br>
             <!----
             <span> Species Name:<br>  <input type="text" name="name"> </span>
             <br>
@@ -100,7 +131,7 @@
         </form>
     </div>
     <div class="divunselect" id="regiondiv">
-        <form name="form1" action="index.php" method="post">
+        <form name="form1" action="postregion.php" method="post">
             <!-- this php file will take us back home :) -->
 
 
@@ -141,7 +172,7 @@
     </div>
 
     <div class="divunselect" id="typediv">
-        <form name="form2" action="index.php" method="post">
+        <form name="form2" action="posttype.php" method="post">
             <!-- this php file will take us back home :) -->
             <span> Type:<br>  <input type="text" name="type"> </span>
 
@@ -159,7 +190,7 @@
 
     <div class="divunselect" id="movediv">
 
-        <form name="form3" action="index.php" method="post">
+        <form name="form3" action="postmove.php" method="post">
             <!-- this php file will take us back home :) -->
 
 
@@ -175,14 +206,32 @@
         
 
 
-            <span>Type:<br><select name="type"><option value="Fire"> Fire </option></select>  </span>
+            <span>Type:<br><select name="type"><?php 
+            while($row=mysqli_fetch_array($r)){ 
+            echo "<option value='" . $row['name'] . "'>" . $row['name'] . "</option>" ;
+            } ?></select>  </span>
+            
+            <br>
+            <br>
+            
+            <span>Base Power:<br> <input type="number" name="power"> </span>
+            
+            <?php mysqli_close($connection); ?>
 
 
 
             <br>
 
             <br>
+            <span>Attack Mode:<br> <select name="attack_mode">
+            <option value="Physical">Physical</option>
+            <option value="Special">Special</option> 
+            <option value="Status">Status</option> 
+            </select>
+            </span>
 
+            <br>
+            <br>
             <br>
 
           <input onclick="return check(3)" type="submit" value="Submit">
@@ -195,7 +244,7 @@
     </div>
 
     <div class="divunselect" id="abilitydiv">
-        <form name="form4" action="index.php" method="post">
+        <form name="form4" action="postability.php" method="post">
             <!-- this php file will take us back home :) -->
 
 
