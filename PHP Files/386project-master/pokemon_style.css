@@ -63,6 +63,16 @@ table, td, th {
 	color: white;
 }
 
+.fire {
+	background-color: orange;
+	color: white;
+}
+
+.fighting {
+	background-color: maroon;
+	color: white;
+}
+
 .status {
 	background-color: grey;
 	color: white;
