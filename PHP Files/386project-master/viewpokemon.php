@@ -1,7 +1,14 @@
 ﻿<html>
 <head>
 
-<title>Bulbasaur</title>
+<?php
+if($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB')) { }
+else { echo "No connection"; }
+$query = "select * from Pokemon where name='".($_POST['poke'])."';";
+$result = mysqli_query($connection, $query);
+$r = mysqli_fetch_array($result);
+echo '<title>'.$r['name'].'</title>';
+?>
 <meta charset="utf-8">
 <link rel="stylesheet" href="pokemon_style.css"
 
