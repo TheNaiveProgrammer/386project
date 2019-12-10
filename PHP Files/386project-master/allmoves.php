@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+       <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
 
     <style>
         td {
@@ -18,6 +19,8 @@
         .container {
             width: 100%;
             max-width: 1000px;
+            margin-left: 20%;
+
         }
 
         h4 {
@@ -40,6 +43,26 @@
     </style>
 
 </head>
+
+
+
+<main class="main">
+  <aside class="sidebar">
+    <nav class="nav">
+      <ul>
+        <li class="active"><a href="allpokemon.php">Pokemon</a></li>
+        <li><a href="allregions.php">Regions</a></li>
+        <li><a href="allmoves.php">Moves</a></li>
+        <li><a href="allabilities.php">Abilities</a></li>
+		<li><a href="alltypes.php">Types</a></li>
+      </ul>
+    </nav>
+  </aside>
+</main>
+
+
+
+
 
 <body>
 

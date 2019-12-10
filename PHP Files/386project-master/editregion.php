@@ -2,18 +2,31 @@
 <head>
 <title>Edit Hoenn</title>
 <meta charset="utf-8">
-<link rel="stylesheet" href="pokemon_style.css">
+<link rel="stylesheet" href="pokemon_style.css" />
+      <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
+
+
 </head>	
 
+
+<main class="main">
+  <aside class="sidebar">
+    <nav class="nav">
+      <ul>
+        <li class="active"><a href="allpokemon.php">Pokemon</a></li>
+        <li><a href="allregions.php">Regions</a></li>
+        <li><a href="allmoves.php">Moves</a></li>
+        <li><a href="allabilities.php">Abilities</a></li>
+		<li><a href="alltypes.php">Types</a></li>
+      </ul>
+    </nav>
+  </aside>
+</main>
+
+
+
 <body>
-	<div class="menu">
-                <div class="menu_element"><a href="index.php">Home Page</a></div>
-                <div class="menu_element"><a href="allpokemon.php">Pokemon</a></div>
-                <div class="menu_element"><a href="allregions.php">Regions</a></div>
-                <div class="menu_element"><a href="allmoves.php">Moves</a></div>
-                <div class="menu_element"><a href="allabilities.php">Abilities</a></div>
-                <div class="menu_element"><a href="alltypes.php">Types</a></div>
-	</div>
+	
 
 	<div class="wrap">
 	<form action="" method="post">

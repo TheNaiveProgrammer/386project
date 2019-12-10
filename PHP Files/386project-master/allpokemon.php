@@ -9,21 +9,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
-
 <style>
-
-.button {
-  background: none!important;
-  border: none;
-  padding: 0!important;
-  /*optional*/
-  font-family: arial, sans-serif;
-  /*input has OS specific font-family*/
-  color: #069;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
     td {
         text-align: center;
     }
@@ -35,6 +21,7 @@
  
   width:100%;
   max-width:1000px;
+  margin-left: 20%;
 }
 
 h4 {
@@ -70,12 +57,11 @@ h4 {
   <aside class="sidebar">
     <nav class="nav">
       <ul>
-        <li class="active"><a href="allpokemon.html">Pokemon</a></li>
-        <li><a href="allregions.html">Regions</a></li>
-        <li><a href="allmoves.html">Moves</a></li>
-        <li><a href="allabilities.html">Abilities</a></li>
-		<li><a href="alltypes.html">Types</a></li>
-        <li><a href="#">News</a></li>
+        <li class="active"><a href="allpokemon.php">Pokemon</a></li>
+        <li><a href="allregions.php">Regions</a></li>
+        <li><a href="allmoves.php">Moves</a></li>
+        <li><a href="allabilities.php">Abilities</a></li>
+		<li><a href="alltypes.php">Types</a></li>
       </ul>
     </nav>
   </aside>
@@ -145,7 +131,7 @@ h4 {
                                 echo "<tr><form action='viewpokemon.php' method='post'>";
                                 echo "<td scope='row'>" . $row['nat_num'] . "</td>";
 				echo "<td> none </td>";
-				echo "<td><input type='submit' class='button' value=" . $row['name'] . "></td>";
+				echo "<td><input type='submit' value=" . $row['name'] . "></td>";
 				echo "<td> none </td>"; 
 				echo "<input type='hidden' name='poke' id='poke' value=".$row['name'] ."></form></tr>";
 			} 

@@ -23,7 +23,6 @@
                 <li><a href="allmoves.php">Moves </a></li>
                 <li><a href="allabilities.php">Abilities</a></li>
                 <li><a href="alltypes.php">Types</a></li>
-                <li><a href="#">Random page </a></li>
                 <li><a href="#">News </a></li>
             </ul>
         </div>

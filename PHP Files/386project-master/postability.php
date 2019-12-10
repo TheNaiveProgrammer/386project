@@ -28,8 +28,7 @@ if($connection = @mysqli_connect('localhost','lmartin9', 'Ballislife93!', 'Pokem
 		}
 		
 		
-		$query = "INSERT INTO Region(name,generation) VALUES ('" . $_POST["name"] . "', " . $_POST["gen"] . ");";
-		  		//print $query;
+		$query = "INSERT INTO Abilities(name,description) VALUES ('" . $_POST["name"] . "', '" . $_POST["bio"] . "');";
 
 		if(mysqli_query($connection, $query)){
 		echo "<div class='postbox'> <p style='text-align: center; vertical-align:middle;line-height:250px;'>" . $_POST["name"] . " was added!</p>";

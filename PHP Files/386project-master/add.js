@@ -165,10 +165,14 @@ function check(num) {
 
     } else if (num == 3) {
         name = document.forms["form3"]["name"].value;
-        if (name == "") {
+	var power = document.forms["form3"]["power"].value;
+        if (name == "" || power == "" ) {
             alert("Each Criteria must be filled");
             return false;
-        }
+        } else if (!/^[0-9]+$/.test(power)){
+	  alert("Power must be non-negative");
+	  return false;
+	}
 
 
     } else if (num == 4) {
