@@ -111,11 +111,11 @@
               $query = "SELECT name FROM Abilities;" ;
           }
                 $r = mysqli_query($connection, $query);
-
+				
                         while($row=mysqli_fetch_array($r)){
                                 echo "<tr><form action='viewability.php' method='post'>";
-                                echo "<td><input type='submit' value=" . $row['name'] . "></td>";
-                                echo "<input type='hidden' name='ability' id='ability' value=".$row['name'] ."></form></tr>";
+                                echo "<td><input type='submit' value=\"" . $row['name'] . "\"></td>";
+                                echo "<input type='hidden' name='ability' id='ability' value=\"".$row['name'] ."\"></form></tr>";
 			}
 			
                         mysqli_close($connection);

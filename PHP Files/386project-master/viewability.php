@@ -40,7 +40,9 @@
 		<div class="pokedex-desc">
 		<h3> Ability Effect</h3>
 		<p><?php echo $r['description']; ?></p>
-        </div>
+
+		
+	</div>
         
         <div class="poke-blurb">
 		<h3><?php echo $r['name']; ?></h3>
@@ -49,7 +51,36 @@
 	<input type=submit value="Edit this ability">
 	</form>
         </div>
-		
+
+	<div class="movelist">
+	<center>
+	<table class="moves">
+	<caption><h3>Pokemon with this Ability</h3></caption>
+		<tr>
+		<th>Pokemon</th>
+		<th>Type</th>
+		</tr>
+		<?php
+		$query = "select Pokemon.nat_num, Pokemon.name from Pokemon, (select * from Norm_Ability union select * from Hidden_Ability) as A where Pokemon.nat_num = A.nat_num and A.ability_name = \"" . $r['name'] . "\";";
+		$poke = mysqli_query($connection, $query);
+		while ($p = mysqli_fetch_array($poke)) 
+		{
+			echo "<tr>";
+			echo "<td>" . $p['name'] . "</td>";
+			$query = "select type from IsType where nat_num = " . $p['nat_num'] . ";";
+			$type = mysqli_query($connection, $query);
+			echo "<td>";
+			while ($t = mysqli_fetch_array($type))
+			{
+				echo "<span class=" . strtolower($t['type']) . ">" . $t['type'] . "</span>";
+			}
+			echo "</tr>";
+		}
+		?>
+	</table>
+	</center>
+	</div>
+
 	</div>
 <?php mysqli_close($connection); ?>
 </body>
