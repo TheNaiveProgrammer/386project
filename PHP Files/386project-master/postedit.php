@@ -65,7 +65,7 @@ mysqli_close($connection);
 
 <form action="viewpokemon.php" method="post">
 <input type=submit value="Go back">
-<input type=hidden name=poke value=<?php echo $_POST['pokename']; ?>>
+<input type=hidden name=poke value=<?php echo $_POST['natnum']; ?>>
 </form>
 </body>
 </html>

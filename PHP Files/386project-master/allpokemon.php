@@ -141,7 +141,7 @@ h4 {
 					echo '<span class="' . strtolower($t['type']) . '">' . $t['type'] .'</span>';
 				}
 				echo "</td>"; 
-				echo "<input type='hidden' name='poke' id='poke' value=".$row['name'] ."></form></tr>";
+				echo "<input type='hidden' name='poke' id='poke' value=".$row['nat_num'] ."></form></tr>";
 			} 
 			mysqli_close($connection);
 				?>
