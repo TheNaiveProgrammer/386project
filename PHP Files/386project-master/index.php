@@ -76,7 +76,7 @@
 		
     ?>
         <h3 style="text-align:center">Random Pokemon!</h3>
-        <p>Name: <?php echo $row['name'];  ?></p>
+        <p>Name: <?php echo "<form method='post' action='viewpokemon.php'>" .$row['name']. "</form>";  ?></p>
         <p>Number: <?php echo $row['nat_num']; ?> </p>
         <p>Type: <?php while($row2=mysqli_fetch_array($r2)){
 		      echo $row2['type'] . " ";
