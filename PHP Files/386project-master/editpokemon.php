@@ -54,7 +54,7 @@
 		echo '<select name="primarytype">';
 		while ($t = mysqli_fetch_array($types))
 		{
-			echo '<option value="'.strtolower($t['name']).'"';
+			echo '<option value="'.$t['name'].'"';
 			if (strcmp($t['name'], $pri_type)==0)
 			{
 				echo ' selected="selected"';
@@ -69,7 +69,7 @@
 		$types = mysqli_query($connection, $query);
 		while ($t = mysqli_fetch_array($types))
 		{
-			echo '<option value="'.strtolower($t['name']).'"';
+			echo '<option value="'. $t['name'].'"';
 			if (strcmp($t['name'], $sec_type)==0)
 			{
 				echo ' selected="selected"';
@@ -129,7 +129,10 @@
 	echo '</form><br><br>';
 	
 	?>
-	
+	<form action="viewpokemon.php" method="post">
+	<input type=submit value="Go back">
+	<input type=hidden name=poke value=<?php echo $r['name']; ?>>
+	</form>	
 	</div>
 </body>
 </html>
