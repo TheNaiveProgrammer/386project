@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-   <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
+   <link href="sidebar_them.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="pokemon_style.css" type="text/css" /> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
@@ -132,7 +133,14 @@ h4 {
                                 echo "<td scope='row'>" . $row['nat_num'] . "</td>";
 				echo "<td> none </td>";
 				echo "<td><input type='submit' value=" . $row['name'] . "></td>";
-				echo "<td> none </td>"; 
+				echo "<td>";
+				$type_query = "select type from IsType where nat_num = " . $row['nat_num'] . ";";
+				$type = mysqli_query($connection, $type_query);
+				while ($t = mysqli_fetch_array($type))
+				{
+					echo '<span class="' . strtolower($t['type']) . '">' . $t['type'] .'</span>';
+				}
+				echo "</td>"; 
 				echo "<input type='hidden' name='poke' id='poke' value=".$row['name'] ."></form></tr>";
 			} 
 			mysqli_close($connection);
