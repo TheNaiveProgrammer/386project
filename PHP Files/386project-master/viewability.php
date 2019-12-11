@@ -4,7 +4,7 @@
 <title>Flash Fire</title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="pokemon_style.css" />
-      <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
+<link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
 
 </head>
 
