@@ -118,22 +118,16 @@ function check(num) {
     if (num == 0) {
         name = document.forms["form0"]["name"].value;
         var nat_num = document.forms["form0"]["nat_num"].value;
-        var form = document.forms["form0"]["poke_form"].value;
+       
 
-        if ((name == "") || (form == "") || (nat_num == "")) {
+        if ((name == "")  || (nat_num == "")) {
             alert("Each criteria must be filled");
             return false;
         }
 
-        if (form != "") {
+   
 
-            if (!/^[a-zA-Z]+$/.test(form)) {
-                alert("Form of Pokemon must be only characters");
-                return false;
-            }
-        }
-
-        if (!/^[0-9]+$/.test(nat_num)) {
+        if (!/^[1-9]+$/.test(nat_num)) {
             alert("National Number must be non-negative");
             return false;
         }
@@ -153,7 +147,7 @@ function check(num) {
             }
         }
 
-        if (!/^[0-9]+$/.test(gen)) {
+        if (!/^[1-9]+$/.test(gen)) {
             alert("Generation must be non-negative");
             return false;
         }
@@ -171,10 +165,14 @@ function check(num) {
 
     } else if (num == 3) {
         name = document.forms["form3"]["name"].value;
-        if (name == "") {
+	var power = document.forms["form3"]["power"].value;
+        if (name == "" || power == "" ) {
             alert("Each Criteria must be filled");
             return false;
-        }
+        } else if (!/^[0-9]+$/.test(power)){
+	  alert("Power must be non-negative");
+	  return false;
+	}
 
 
     } else if (num == 4) {

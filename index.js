@@ -1,5 +1,5 @@
 // JavaScript source code
 function addpokemon() {
 
-    window.location.href = "addpokemon.html"
+    window.location.href = "addpokemon.php"
 }

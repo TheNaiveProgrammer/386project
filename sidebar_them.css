@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+
+.sidebar {
+  position: fixed;
+  width: 15%;
+  height: 50vh;
+  background: lightblue;
+  color: lightblue;
+  margin-left: 15px;
+  margin-right: 15%;
+}
+
+ .nav {
+  position: absolute;
+  top: 35%;
+  font-size: 1.6vw;
+  transform: translateY(-50%);
+  font-weight: bold;
+}
+

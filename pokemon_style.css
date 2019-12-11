@@ -16,6 +16,7 @@ div.wrap {
 	overflow: hidden;
 	margin: auto;
 	margin-top: 10px;
+	margin-left: 20%;
 }
 
 div.pokedex-desc {
@@ -49,18 +50,92 @@ table, td, th {
 
 .grass {
 	background-color: #00BF55;
-	color: white;
+	color: #dddddd;
 }
 
+.electric {
+	background-color: #fcd71b;
+	color: #eeeeee;
+}
 
 .poison {
 	background-color: purple;
-	color: white;
+	color: #dddddd;
 }
 
 .normal {
 	background-color: grey;
-	color: white;
+	color: #dddddd;
+}
+
+.fire {
+	background-color: orange;
+	color: #eeeeee;
+}
+
+.fighting {
+	background-color: maroon;
+	color: #dddddd;
+}
+
+.water {
+	background-color: #4b95f4;
+	color: #dddddd;
+}
+
+.psychic {
+	background-color: pink;
+	color: #dddddd;
+}
+
+.ice {
+	background-color: lightblue;
+	color: #dddddd;
+}
+
+.dragon {
+	background-color: #530866;
+	color: #dddddd;
+}
+
+.dark {
+	background-color: #333333;
+        color: #dddddd;
+}
+
+.fairy {
+	background-color: lightpink;
+        color: #dddddd;
+}
+
+.flying {
+	background-color: #bc8bd9;
+	color: #dddddd;
+}
+
+.ground {
+	color: #dddddd;
+	background-color: #d9b155;
+}
+
+.rock {
+	color: #dddddd;
+	background-color: #856826;
+}
+
+.bug {
+	color: #dddddd;
+	background-color:#69ad2a;
+}
+
+.ghost {
+	color: #dddddd;
+	background-color:#634973;
+}
+
+.steel {
+	color: #dddddd;
+	background-color:#79767a;
 }
 
 .status {
