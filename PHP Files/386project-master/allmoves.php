@@ -4,10 +4,11 @@
     <title>All Moves</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel=stylesheet href="pokemon_style.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-       <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
+       <link href="sidebar_them.css" rel="stylesheet" type="text/css" />
 
     <style>
         td {
@@ -100,29 +101,33 @@
                             <th scope="col">Name</th>
                             <th scope="col">Type</th>
                             <th scope="col">Base Power</th>
-
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row"><a href="viewmove.php">Thunderbolt</a></td>
+		    <tbody>
+			<?php
+			if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
+			{} else { echo "No connection<br>"; }
+			
+			$query = "select * from Moves";
+			$moves = mysqli_query($connection, $query);
+			while ($m = mysqli_fetch_array($moves))
+			{
+				echo "<tr>";
+				echo "<td><form action=viewmove.php method=post>";
+				echo "<input type=hidden name=move value=\"" . $m['name'] . "\">";
+				echo "<input type=submit value=\"" . $m['name'] . "\">";
+				echo "</form></td>";
 
-                            <td>Electric</td>
-                            <td>100</td>
-
-                        </tr>
-                        <tr>
-                            <td scope="row"><a href="#">Flamethrower</a></td>
-                            <td>Fire</td>
-                            <td>90</td>
-
-                        </tr>
-                        <tr>
-                            <td scope="row"><a href="#">Sleep Powder</a></td>
-                            <td>Grass</td>
-                            <td>-</td>
-
-                        </tr>
+				echo "<td><span class=" . strtolower($m['movetype']) . ">" . $m['movetype'] . "</span></td>";
+				echo "<td>";
+				if ($m['base_power'] == 0)
+					echo "---";
+				else
+					echo $m['base_power'];
+				echo "</td>";
+				echo "</tr>";
+			}
+			?>
                     </tbody>
                 </table>
             </div>

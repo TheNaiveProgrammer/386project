@@ -1,7 +1,15 @@
 ﻿<html>
 <head>
 
-<title>Thunderbolt</title>
+<?php
+if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
+{ } else { echo "No connection<br>"; }
+
+$query = "select * from Moves where name = \"" . $_POST['move'] . "\";";
+$r = mysqli_fetch_array(mysqli_query($connection, $query));
+?>
+
+	<title><?php echo $r['name']?></title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="pokemon_style.css" />
       <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
@@ -36,23 +44,40 @@
 	<div class="wrap">
 		
 		<div class="pokedex-desc">
-		<h3> Move Effect</h3>
-		<p>Thunderbolt does damage and has a 10% chance of paralyzing the target. Thunderbolt cannot paralyze Electric-type Pokémon. </p>
+		<h3> Move Effects</h3>
+		<p>
+		<?php
+		if ($r['effect'] == '')
+			echo 'This move has no additional effects beyond damage.<br>';
+		else
+			echo $r['effect'] . "<br>";
+		?>
+		 </p>
         </div>
         
         <div class="poke-blurb">
-        <img src="Electric-main.jpg" class="poke">
-		<h3>Thunderbolt</h3>
-        <p>Type: Electric</p>
-        <p>Base Power: 90</p>
-        <p>Effect Chance: 10%</p>
-        <p>Accuracy: 100%</p>
-        <p>Attack Mode: Special</p>
+        
+	<h3><?php echo $r['name']; ?></h3>
+	<p>Type: <?php echo $r['movetype']; ?></p>
+	<p>Base Power: <?php
+		if ($r['base_power'] == '')
+			echo "---";
+		else
+			echo $r['base_power'];
+		?></p>
+	<p>Effect Chance: <?php
+		if ($r['effect_chance'] == 0)
+			echo "---";
+		else
+			echo $r['effect_chance'];
+	?></p>
+	<p>Accuracy: <?php echo $r['accuracy']; ?></p>
+	<p>Attack Mode: <span class=<?php echo strtolower($r['attack_mode']) . ">" . $r['attack_mode']; ?></span></p>
         <p><a href="editmove.php">Edit this Move</a></p>
         </div>
 		
 	</div>
 </body>
-
+<?php mysqli_close($connection); ?>
 </html>
 
