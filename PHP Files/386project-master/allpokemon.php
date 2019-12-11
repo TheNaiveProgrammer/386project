@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
    <link href="sidebar_them.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="pokemon_style.css" type="text/css" /> 
+  <link href="link.css" rel="stylesheet" type="text/css" /> 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 
@@ -98,7 +99,7 @@ h4 {
             <select name="searchlist" form="search" >
                 <option value="name" <?php if($_POST['searchlist'] == 'name') echo ' selected="selected"'; ?>>Name</option>
                 <option value="nat_num" <?php if($_POST['searchlist'] == 'nat_num') echo ' selected="selected"'; ?>>Number</option>
-               
+                <option value="type" <?php if($_POST['searchlist'] == 'type') echo ' selected="selected"'; ?>>Type</option>
             </select>
             <input type="submit"  name="search" value="Go">
         </form>
@@ -111,7 +112,7 @@ h4 {
                     <thead>
                         <tr>
                             <th scope="col">National Number</th>
-                            <th scope="col">Image</th>
+                         
                             <th scope="col">Pokemon Name</th>
                             <th scope="col">Type</th>
                         </tr>
@@ -119,9 +120,11 @@ h4 {
                     <tbody>
 			<?php 
 		
-  if(isset($_POST['search'])){
+  if(isset($_POST['search']) && $_POST['searchlist']!= 'type'){
 	    	    
 	   $query = "SELECT nat_num, name FROM Pokemon WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['search_text'] . "%' ORDER BY nat_num";
+	}else if(isset($_POST['search']) && $_POST['searchlist'] == "type"){
+	  $query = "SELECT P.nat_num, P.name from Pokemon as P, IsType as T where P.nat_num = T.nat_num and T.type like \"%" . $_POST['search_text'] . "%\";";
 	}else {
 	      $query = "SELECT nat_num, name FROM Pokemon ORDER BY nat_num;" ;
 	     
@@ -131,8 +134,7 @@ h4 {
                         while($row=mysqli_fetch_array($r)){
                                 echo "<tr><form action='viewpokemon.php' method='post'>";
                                 echo "<td scope='row'>" . $row['nat_num'] . "</td>";
-				echo "<td> none </td>";
-				echo "<td><input type='submit' value=" . $row['name'] . "></td>";
+				echo "<td><input type='submit' class='link' value=" . $row['name'] . "></td>";
 				echo "<td>";
 				$type_query = "select type from IsType where nat_num = " . $row['nat_num'] . ";";
 				$type = mysqli_query($connection, $type_query);

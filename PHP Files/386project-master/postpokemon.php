@@ -35,7 +35,7 @@ if($connection = @mysqli_connect('localhost','lmartin9', 'Ballislife93!', 'Pokem
 		if(mysqli_query($connection, $query)){
 		$type_query = "INSERT INTO IsType(nat_num, type) VALUES (" . $_POST["nat_num"] . ", '" . $_POST["type"] . "');";
 		
-		print $type_query;	
+		//print $type_query;	
 		mysqli_query($connection,$type_query);
 		if($_POST['type2']!='NULL'){
 		  $type_query2 = "INSERT INTO IsType(nat_num, type) VALUES (" . $_POST["nat_num"] . ", '" . $_POST["type2"] . "');";

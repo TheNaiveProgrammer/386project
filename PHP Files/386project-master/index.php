@@ -5,6 +5,7 @@
     <meta charset="utf-8" />
     <link href="index.css" rel="stylesheet" type="text/css" /> 
         <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
+        <link href="link.css" rel="stylesheet" type="text/css" /> 
 
     <script src="index.js"> </script>
     <title>Index</title>
@@ -63,6 +64,7 @@
 		}
 		
 		$query = "SELECT * FROM Pokemon ORDER BY RAND();";
+		
 		$r = mysqli_query($connection, $query);
 		$row=mysqli_fetch_array($r);
 		
@@ -76,15 +78,59 @@
 		
     ?>
         <h3 style="text-align:center">Random Pokemon!</h3>
-        <p>Name: <?php echo "<form method='post' action='viewpokemon.php'>" .$row['name']. "</form>";  ?></p>
+        <p> <?php echo "<form method='post' action='viewpokemon.php'>Name: <input class='link' type='submit' value = '" . $row['name'] . "'> <input type='hidden' name='poke' id='poke' value=".$row['nat_num'] ."></form>";  ?></p>
         <p>Number: <?php echo $row['nat_num']; ?> </p>
-        <p>Type: <?php while($row2=mysqli_fetch_array($r2)){
-		      echo $row2['type'] . " ";
-		  }?>
+        <p><?php 
+          
+        $it = 0;
+        echo "Type: ";
+        while($row2=mysqli_fetch_array($r2)){
+	 echo $row2['type'] . " ";/*	   
+		      
+		       if($it==0){
+		      
+		         echo "<form  action='viewtype.php' style='float:left;' method='post'>";
+		         echo "Type(s): ";
+                                echo "<input type='submit' class='link' style='display:inline;' value=\"" . $row2['type'] . "\">";
+                                echo "<input type='hidden' name='type'  value=\"".$row2['type'] ."\"></form>";
+                                
+                              } else{
+				
+		         echo "<form  action='viewtype.php' method='post' >";
+                               echo "<input type='submit' class='link' style='display:inline; margin-left:5px;' value=\"" . $row2['type'] . "\">";
+                                echo "<input type='hidden' name='type'  value=\"".$row2['type'] ."\"></form>";
+                              }
+                              $it++;
+		  }
+		  
+		  if($it==0)
+		    echo "Type: Unknown";
+		   */ 
+		  }
+		  ?>
         </p>
-        <p>Abilities:  <?php while($row3=mysqli_fetch_array($r3)){
-		      echo $row3['ability_name'] . " ";
-		  }?> </p>
+        <p>  <?php $it = 0; 
+        while($row3=mysqli_fetch_array($r3)){
+		    if($it==0){
+		      
+		         echo "<form  action='viewability.php' style='float:left;' method='post'>";
+		         echo "Abilities: ";
+                                echo "<input type='submit' class='link' style='display:inline;' value=\"" . $row3['ability_name'] . "\">";
+                                echo "<input type='hidden' name='ability' id='ability' value=\"".$row3['ability_name'] ."\"></form>";
+                                
+                              } else{
+				
+		         echo "<form  action='viewability.php' method='post' >";
+                                echo "<input type='submit' class='link' style='display:inline; margin-left:5px;' value=\"" . $row3['ability_name'] . "\">";
+                                echo "<input type='hidden' name='ability' id='ability' value=\"".$row3['ability_name'] ."\"></form>";
+                              }
+                              $it++;
+		  }
+		  
+		  if($it==0)
+		    echo "Abilities: None";
+		    
+		    ?> </p>
         <?php mysqli_close($connection); ?>
     </div>
     <div id="third">
