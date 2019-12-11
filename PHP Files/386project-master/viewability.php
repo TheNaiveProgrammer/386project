@@ -66,7 +66,12 @@
 		while ($p = mysqli_fetch_array($poke)) 
 		{
 			echo "<tr>";
-			echo "<td>" . $p['name'] . "</td>";
+			echo "<td>";
+			echo "<form method=post action=viewpokemon.php>";
+			echo "<input type=hidden name=poke value=\"" . $p['name'] . "\">";
+			echo "<input type=submit value=\"" .$p['name'] . "\">";
+			echo "</form>";
+		       	echo "</td>";
 			$query = "select type from IsType where nat_num = " . $p['nat_num'] . ";";
 			$type = mysqli_query($connection, $query);
 			echo "<td>";
