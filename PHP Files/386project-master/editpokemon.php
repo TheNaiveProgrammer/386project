@@ -131,7 +131,7 @@
 	?>
 	<form action="viewpokemon.php" method="post">
 	<input type=submit value="Go back">
-	<input type=hidden name=poke value=<?php echo $r['name']; ?>>
+	<input type=hidden name=poke value=<?php echo $r['nat_num']; ?>>
 	</form>	
 	</div>
 </body>

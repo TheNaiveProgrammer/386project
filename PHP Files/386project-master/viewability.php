@@ -68,7 +68,7 @@
 			echo "<tr>";
 			echo "<td>";
 			echo "<form method=post action=viewpokemon.php>";
-			echo "<input type=hidden name=poke value=\"" . $p['name'] . "\">";
+			echo "<input type=hidden name=poke value=\"" . $p['nat_num'] . "\">";
 			echo "<input type=submit value=\"" .$p['name'] . "\">";
 			echo "</form>";
 		       	echo "</td>";

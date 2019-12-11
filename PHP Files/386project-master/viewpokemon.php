@@ -42,7 +42,7 @@ echo '<title>'.$r['name'].'</title>';
 		else {
 			echo "No connection";
 		}
-		$query = "select * from Pokemon where name='".($_POST['poke'])."';";
+		$query = "select * from Pokemon where nat_num='".($_POST['poke'])."';";
 		$result = mysqli_query($connection, $query);
 		echo '<div class="pokedex-desc">';
 		echo '<h3> Pokedex Description </h3>';
