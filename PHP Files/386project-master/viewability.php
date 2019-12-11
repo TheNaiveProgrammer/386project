@@ -28,22 +28,30 @@
 
 
 <body>
-
+<?php
+	if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
+	{} else { echo "no connection"; }
+	$query = "select * from Abilities where name = \"" . $_POST['ability'] . "\";";
+	
+       	$r = mysqli_fetch_array(mysqli_query($connection, $query));	
+?>
 	<div class="wrap">
 		
 		<div class="pokedex-desc">
 		<h3> Ability Effect</h3>
-		<p>Flash Fire makes the Pokémon immune to Fire-type moves and will activate when hit by one. When activated, the power of the Pokémon's Fire-type moves is increased by 50%. While subsequent hits by Fire-type moves will not provide further increases in power, the Pokémon remains immune to the moves.  Flash Fire will not activate if the Pokémon is protected from the Fire-type move. Flash Fire will not work while the user is frozen. </p>
+		<p><?php echo $r['description']; ?></p>
         </div>
         
         <div class="poke-blurb">
-		<h3>Flash Fire Ability</h3>
-		<p>Powers up if hit by fire.</p>
-        <p>First introduced: Gen 3</p>
-        <p><a href="editability.php">Edit this Ability</a></p>
+		<h3><?php echo $r['name']; ?></h3>
+	<form action="editability.php" method="post">
+	<input type="hidden" name="ability" value=<?php echo "\"".$r['name']."\""?>>
+	<input type=submit value="Edit this ability">
+	</form>
         </div>
 		
 	</div>
+<?php mysqli_close($connection); ?>
 </body>
 
 </html>

@@ -66,7 +66,10 @@
 
 
 <body>
-
+<?php
+	if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
+	{ } else { echo "No connection"; }
+		?>
     <div class="container">
         <div class="jumbotron">
             <a href="index.php">Back to Menu</a>
@@ -77,17 +80,15 @@
 
         Sort By: <select>
             <option value="name">Name</option>
-            <option value="type">Generation</option>
 
         </select>
 
-        <form style="margin-left:150px;display:inline-block">
+        <form action="allabilities.php" method="post" name="s" id="search" style="margin-left:150px;display:inline-block">
 
-            <input type="text" placeholder="Search..." style="margin-left:5px;">
+            <input type="text" placeholder="Search..." name="search_text" style="margin-left:5px;">
             By
-            <select>
+            <select name="searchlist" form="search">
                 <option value="name">Name</option>
-                <option value="type">Generation</option>
 
             </select>
             <input type="submit" value="Go">
@@ -99,25 +100,26 @@
                     <thead>
                         <tr>
                             <th scope="col">Name</th>
-                            <th scope="col">Generation Introduced</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row"><a href="viewability.php">Flash Fire</a></td>
-                            <td class="num">3</td>
+		    <tbody>
+			<?php
+		
+	if(isset($_POST['search'])) { 
+		$query = "SELECT name FROM Abilities WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['search_text'] . "%';";
+	}  else {
+              $query = "SELECT name FROM Abilities;" ;
+          }
+                $r = mysqli_query($connection, $query);
 
-
-                        </tr>
-                        <tr>
-
-                            <td scope="row"><a href="#">Moody</a></td>
-
-                            <td class="num">5</td>
-
-
-                        </tr>
-
+                        while($row=mysqli_fetch_array($r)){
+                                echo "<tr><form action='viewability.php' method='post'>";
+                                echo "<td><input type='submit' value=" . $row['name'] . "></td>";
+                                echo "<input type='hidden' name='ability' id='ability' value=".$row['name'] ."></form></tr>";
+			}
+			
+                        mysqli_close($connection);
+                                ?>
                     </tbody>
                 </table>
             </div>
