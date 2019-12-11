@@ -38,8 +38,14 @@
 	<span>Ability Effect: <br> <textarea rows=5 cols=40 name=desc><?php echo $r['description']; ?></textarea></span><br><br>
 		<input type=submit value=Submit>
 	</form><br><br>
-	<a href="viewability.php">Go Back</a>
-	
+
+
+	<form action="viewability.php" method=post>
+	<input type=submit value="Go back">
+	<input type=hidden name=ability value=<?php echo "\"" . $r['name'] . "\"" ?>>
+	</form>
+
+	<?php mysqli_close($connection); ?>
 	</div>
 </body>
 </html>
