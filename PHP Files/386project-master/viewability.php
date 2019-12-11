@@ -40,6 +40,7 @@
 		<div class="pokedex-desc">
 		<h3> Ability Effect</h3>
 		<p><?php echo $r['description']; ?></p>
+		<br>
 
 		
 	</div>
