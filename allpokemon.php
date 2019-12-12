@@ -120,8 +120,13 @@ h4 {
                     </thead>
                     <tbody>
 			<?php 
-		
-  if(isset($_POST['search']) && $_POST['searchlist']!= 'type'){
+
+			
+	if(isset($_POST['home'])){
+	  $query = "SELECT * FROM Pokemon WHERE name LIKE '%" . $_POST['home_search']. "%';";
+	  
+	}		
+  else if(isset($_POST['search']) && $_POST['searchlist']!= 'type'){
 	    	    
 	   $query = "SELECT nat_num, name FROM Pokemon WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['search_text'] . "%' ORDER BY nat_num";
 	}else if(isset($_POST['search']) && $_POST['searchlist'] == "type"){
