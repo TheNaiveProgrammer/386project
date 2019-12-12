@@ -1,4 +1,8 @@
-﻿<html>
+﻿<?php
+session_start();
+?>
+
+<html>
 <head>
 <?php
 if ($connection = mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
@@ -44,7 +48,29 @@ $type = mysqli_fetch_array(mysqli_query($connection, $query));
         <div class="poke-blurb">
 	<h3><?php echo $type['name']; ?> Type</h3>
 	
-        <p><a href="edittype.php">Edit this Type</a></p>
+	<p><a href="edittype.php">Edit this Type</a></p>
+	
+	<?php
+	if(array_key_exists('del', $_POST)) {
+	$query= "delete from Types where name = \"" . $type['name'] . "\";";
+	if (mysqli_query($connection, $query)){ 
+		mysqli_close($connection);
+		header("Location: alltypes.php");
+		} else { echo "ERROR DELETING<br>" . $query; }
+	 
+		//THIS IS WHERE WE WRITE QUERY TO DELETE POKEMON
+		}
+		if(isset($_SESSION['username'])){
+				echo " <form method='post'>
+						<input type='submit' value='Delete'/>
+						<input type='hidden' name='del' value='delete'/>
+						<input type='hidden' name='type' value='".$type['name']
+						."'/></form>";
+		}
+
+	?>
+
+
         </div>
 		
 	</div>

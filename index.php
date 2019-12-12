@@ -53,23 +53,27 @@ session_start();
                 <li><a href="allmoves.php">Moves </a></li>
                 <li><a href="allabilities.php">Abilities</a></li>
                 <li><a href="alltypes.php">Types</a></li>
-                <li><a href="#">News </a></li>
+                
             </ul>
         </div>
+     
         <div style="width:55%;  display:inline-block; position:absolute; top:40%;  float:left; margin-left:5px;">
             <p style="text-align:center; margin-bottom:4px;">Get Started</p>
-            <form id="searchForm">
-                <input type="text" placeholder="Search..." style="text-indent:5px;width:50%; height:30px; border-radius:3px; border:solid; border-color:gray; margin-left: 5px; " />
-                <select type="select" form="searchForm" style="width:24%;  height:35px;margin-left:5px; border-radius:3px; border:solid; border-color:gray;min-width:85px;">
-                    <option value="Form_Pokemon">Pokemon</option>
-                    <option value="Region">Region</option>
-                    <option value="Moves">Moves</option>
-                    <option value="Abilities">Ability</option>
-                    <option value="Types">Type</option>
+            
+            <form id="search_form" name="search_form" method="post">
+                <input type="text" name="home_search" placeholder="Search by name..." style="text-indent:5px;width:50%; height:30px; border-radius:3px; border:solid; border-color:gray; margin-left: 5px; " />
+                <select type="select" id="list" form="searchForm" style="width:24%;  height:35px;margin-left:5px; border-radius:3px; border:solid; border-color:gray;min-width:85px;">
+                    <option value="allpokemon.php">Pokemon</option>
+                    <option value="allregions.php">Region</option>
+                    <option value="allmoves.php">Moves</option>
+                    <option value="allabilities.php">Ability</option>
+                    <option value="alltypes.php">Type</option>
                 </select>
-                <input style="width:18%;height:35px; min-width:55px; border-style:solid; margin-left:5px;border-color:gray; background-color:transparent; "type="submit" value="Submit" />
+                <input style="width:18%;height:35px; min-width:55px; border-style:solid; margin-left:5px;border-color:gray; background-color:transparent; " onclick="get_started()" type="submit" name="home" value="Submit" />
             </form>
+            
             <br />
+           
            
         </div>
 
@@ -82,7 +86,7 @@ session_start();
         </div>
 
     </div>
-    <br /><br />
+    <br /><br /><br><br><br>
 
     <div id="second">
     <?php 

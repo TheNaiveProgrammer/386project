@@ -1,4 +1,8 @@
-﻿<html>
+﻿<?php
+session_start()
+?>
+
+<html>
 <head>
 
 <title>Flash Fire</title>
@@ -51,7 +55,26 @@
 	<input type="hidden" name="ability" value=<?php echo "\"".$r['name']."\""?>>
 	<input type=submit value="Edit this ability">
 	</form>
-        </div>
+       <?php
+	if(array_key_exists('del', $_POST)) {
+	$query= "delete from Abilities where name = \"" . $r['name'] . "\";";
+	if (mysqli_query($connection, $query)){ 
+		mysqli_close($connection);
+		header("Location: allabilities.php");
+		} else { echo "ERROR DELETING<br>" . $query; }
+	 
+		//THIS IS WHERE WE WRITE QUERY TO DELETE POKEMON
+		}
+		if(isset($_SESSION['username'])){
+				echo " <form method='post'>
+						<input type='submit' value='Delete'/>
+						<input type='hidden' name='del' value='delete'/>
+						<input type='hidden' name='ability' value='".$r['name']
+						."'/></form>";
+		}
+
+	?>
+	</div>
 
 	<div class="movelist">
 	<center>
