@@ -18,35 +18,24 @@ input[type=text], input[type=password] {
 
 
 
-/* Set a style for all buttons */
-button {
-  background-color: #4CAF50;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 25%;
-}
 
 .loginbtn {
   width: auto;
-  margin-left: 74px;
+  margin-left: 92px;
   padding: 10px 18px;
+  background-color:green;
+  color:white;
+  cursor:pointer;
+  border: none;
+  
 }
 
-/* Add a hover effect for buttons */
-button:hover {
-  opacity: 0.8;
+
+.loginbtn:hover{
+   opacity: 0.8;
 }
 
-/* Extra style for the cancel button (red) */
-.cancelbtn {
-  margin-left: 8px;
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
+
 
 /* Center the avatar image inside this container */
 /*.imgcontainer {

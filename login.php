@@ -30,7 +30,7 @@
   <br>
 
   <input type="submit" class="loginbtn" value='Login'>
-  <button type="button" class="cancelbtn">Cancel</button>
+  
 
   <label>
     <br>
