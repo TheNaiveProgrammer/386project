@@ -16,7 +16,7 @@ echo '<title>'.$r['name'].'</title>';
 <meta charset="utf-8">
 <link rel="stylesheet" href="pokemon_style.css" />
 <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
-
+<link href="link.css" rel="stylesheet" type="text/css" /> 
 
 </head>
 
@@ -39,6 +39,10 @@ echo '<title>'.$r['name'].'</title>';
 
 
 <body>
+<?php
+
+
+?>
 
 	<div class="wrap">
 		<?php
@@ -49,6 +53,14 @@ echo '<title>'.$r['name'].'</title>';
 		$query = "select * from Pokemon where nat_num='".($_POST['poke'])."';";
 		$result = mysqli_query($connection, $query);
 		echo '<div class="pokedex-desc">';
+		echo "<a href='index.php'>Back to Menu</a>";
+		
+		if(isset($_SESSION['username'])){
+		      echo "<span  style='float:right;'> Username: " . $_SESSION['username'] . "</span>" ;
+		  
+		} else {
+		echo "<a href='login.php' style='float:right;'>Admin Login</a>";
+		}
 		echo '<h3> Pokedex Description </h3>';
 		$r = mysqli_fetch_array($result);
 		echo "<p>" . $r['pokedex_desc'] . "</p>";
