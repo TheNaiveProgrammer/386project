@@ -110,7 +110,7 @@
 			} else{
 			$query = "select * from Moves ORDER BY name";
 			}
-			print $query;
+			//print $query;
 			$moves = mysqli_query($connection, $query);
 			while ($m = mysqli_fetch_array($moves))
 			{

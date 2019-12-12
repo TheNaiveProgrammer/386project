@@ -24,6 +24,7 @@
   width:100%;
   max-width:1000px;
   margin-left: 20%;
+  position:absolute;
 }
 
 h4 {
@@ -129,7 +130,7 @@ h4 {
 	      $query = "SELECT nat_num, name FROM Pokemon ORDER BY nat_num;" ;
 	     
 	  }
-	  print $query;
+	  //print $query;
 		$r = mysqli_query($connection, $query);
 			
                         while($row=mysqli_fetch_array($r)){

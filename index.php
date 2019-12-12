@@ -1,4 +1,11 @@
-﻿<!DOCTYPE html>
+﻿
+<?php
+
+session_start();
+// 
+?>
+
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -11,9 +18,31 @@
     <title>Index</title>
 </head>
 <body>
+
+<?php
+  if(array_key_exists('button1', $_POST)) { 
+            session_unset();
+	    session_destroy();
+	    header("location:index.php");
+	    exit();
+        } 
+
+?>
     <div style="text-align: center;">
     <h1 style="text-align:center;display: inline;">Pokemon Database!</h1>
-    <a href="login.php" style="margin-left: 80%; width:40%;min-width: 200px; white-space: nowrap;">Admin Log In</a>
+    <br>
+    <?php
+    if(isset($_SESSION['username'])){
+      echo "<span  style=' min-width: 200px; float:right; width:23%; white-space: nowrap;'> Hello " . $_SESSION['username'] . "!" ;
+      echo " <form method='post'> 
+		  <input type='submit'  name='button1' class='link' value='Logout'  /> 
+	      </form>
+                </span>";
+      }else{
+	
+	echo "<a href='login.php' style='margin-left: 80%; width:40%;min-width: 200px; white-space: nowrap;'>Admin Log In</a>" ;
+    }
+    ?>
 </div>
     <div id="first">
         <div style="width:20%;display:inline-block;  float:left;">

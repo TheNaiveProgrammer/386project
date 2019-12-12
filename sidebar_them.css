@@ -2,7 +2,7 @@
 
 
 .sidebar {
-  position: fixed;
+  position: absolute;
   width: 15%;
   height: 50vh;
   background: lightblue;
