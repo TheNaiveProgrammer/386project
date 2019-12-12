@@ -48,8 +48,10 @@ $type = mysqli_fetch_array(mysqli_query($connection, $query));
         <div class="poke-blurb">
 	<h3><?php echo $type['name']; ?> Type</h3>
 	
-	<p><a href="edittype.php">Edit this Type</a></p>
-	
+	<form action="edittype.php" method=post>
+	<input type=hidden name=type value="<?php echo $type['name']; ?>"/>
+	<input type=submit value="Edit This Type"/>
+	</form>	
 	<?php
 	if(array_key_exists('del', $_POST)) {
 	$query= "delete from Types where name = \"" . $type['name'] . "\";";
