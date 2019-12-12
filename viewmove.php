@@ -1,4 +1,8 @@
-﻿<html>
+﻿<?php
+session_start();
+?>
+
+<html>
 <head>
 
 <?php
@@ -74,8 +78,26 @@ $r = mysqli_fetch_array(mysqli_query($connection, $query));
 	<p>Accuracy: <?php echo $r['accuracy']; ?></p>
 	<p>Attack Mode: <span class=<?php echo strtolower($r['attack_mode']) . ">" . $r['attack_mode']; ?></span></p>
         <p><a href="editmove.php">Edit this Move</a></p>
-        </div>
+	<?php
+	if(array_key_exists('del', $_POST)) {
+	$query= "delete from Moves where name = \"" . $r['name'] . "\";";
+	if (mysqli_query($connection, $query)){ 
+		mysqli_close($connection);
+		header("Location: allmoves.php");
+		} else { echo "ERROR DELETING<br>" . $query; }
+	 
+		//THIS IS WHERE WE WRITE QUERY TO DELETE POKEMON
+		}
+		if(isset($_SESSION['username'])){
+				echo " <form method='post'>
+						<input type='submit' value='Delete'/>
+						<input type='hidden' name='del' value='delete'/>
+						<input type='hidden' name='move' value='".$r['name']
+						."'/></form>";
+		}
 
+	?>
+	</div>
 	<div class='movelist'>
 	
 	<center>
