@@ -1,9 +1,18 @@
 ﻿<html>
 <head>
 
+<?php
+if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
+{ } else { echo "No connection"; }
+
+
+?>
+
     <title>All Types</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="pokemon_style.css"/>
+    <link rel="stylesheet" href="link.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -75,19 +84,12 @@
             <p>Below is the table listing the types pokemon and moves are able to be. To see more ingormation, click the link.</p>
         </div>
 
-        Sort By: <select>
-            <option value="name">Name</option>
-            
-        </select>
-                 <form style="margin-left:150px;display:inline-block">
 
-                     <input type="text" placeholder="Search..." style="margin-left:5px;">
-                     By
-                     <select>
-                         <option value="name">Name</option>
+                 <form style="margin-left:150px;display:inline-block" method='post' action='alltypes.php'>
 
-                     </select>
-                     <input type="submit" value="Go" >
+                     <input type="text" placeholder="Search..." name='searchlist' style="margin-left:5px;">
+              
+                     <input type="submit" value="Go" name='search' >
                  </form>
 
         <div class="row">
@@ -101,31 +103,48 @@
 
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row"><a href="viewtype.php">Electric</a></td>
+		    <tbody>
+			<?php
+			
+			if(isset($_POST['search'])){
+			$query = "select * from Types where name LIKE '%" . $_POST['searchlist'] . "%' ORDER BY name;";
+			//print $query;
+			} else {
+			$query = "select * from Types ORDER BY name";
+			}
+			$types = mysqli_query($connection, $query);
+			while ($t = mysqli_fetch_array($types))
+			{
+				echo "<tr>";
+				echo "<td><form action=viewtype.php method=post>";
+				echo "<input type=submit class='link' value=\"" . $t['name'] . "\">";
+				echo "<input type=hidden name=type value=\"" . $t['name'] . "\">";
+				echo "</form></td>";
+				$query = "select defending from Strong_Against where attacking = \"" . $t['name'] . "\";";
+				$SA = mysqli_query($connection, $query);
+				echo "<td>";
+				while ($sa = mysqli_fetch_array($SA))
+				{
+					echo "<span class=\"" . strtolower($sa['defending']) . "\">" . $sa['defending'] . "</span>";
+				}
+				echo "</td>";
+				echo "<td>";
 
-                            <td>Water, Flying</td>
-                            <td>Ground</td>
-
-                        </tr>
-                        <tr>
-                            <td scope="row"><a href="#">Grass</a></td>
-                            <td>Water, Ground, Rock</td>
-                            <td>Fire, Flying, Bug </td>
-
-                        </tr>
-                        <tr>
-                            <td scope="row"><a href="#">Water</a></td>
-                            <td>Fire, Ground, Rock</td>
-                            <td>Electric, Grass</td>
-
-                        </tr>
+				$query = "select defending from Weak_Against where attacking = \"" . $t['name'] . "\";";
+				$WA = mysqli_query($connection, $query);
+				while ($wa = mysqli_fetch_array($WA))
+					echo "<span class=\"" . strtolower($wa['defending']) . "\">" . $wa['defending'] . "</span>";
+				echo "</td>";
+				echo "</tr>";
+			}
+			?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+<?php mysqli_close($connection); ?>
 
 </body>
 </html>

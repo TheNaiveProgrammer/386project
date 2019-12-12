@@ -1,10 +1,14 @@
-﻿<html>
+﻿<?php
+session_start();
+?>
+
+<html>
 <head>
 
 <?php
 if($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB')) { }
 else { echo "No connection"; }
-$query = "select * from Pokemon where name='".($_POST['poke'])."';";
+$query = "select * from Pokemon where nat_num='".($_POST['poke'])."';";
 $result = mysqli_query($connection, $query);
 $r = mysqli_fetch_array($result);
 echo '<title>'.$r['name'].'</title>';
@@ -83,6 +87,26 @@ echo '<title>'.$r['name'].'</title>';
 		echo '<input name="num" type=hidden value="'. $r['nat_num'] .'">';
 		echo '<input type=submit value="Edit this Pokemon">';
 		echo '</form>';
+		if(array_key_exists('del', $_POST)) {
+			$query= "delete from Pokemon where nat_num = " . $r['nat_num'] . ";";
+			if (mysqli_query($connection, $query))
+			{ 
+				mysqli_close($connection);
+				header("Location: allpokemon.php");
+			} else { echo "ERROR DELETING<br>" . $query; }
+
+		//THIS IS WHERE WE WRITE QUERY TO DELETE POKEMON
+		}
+		if(isset($_SESSION['username'])){
+				echo " <form method='post'>
+						<input type='submit' value='Delete'/>
+						<input type='hidden' name='del' value='delete'/>
+						<input type='hidden' name='poke' value='".$r['nat_num']
+						."'/></form>";
+		}
+		else{
+		}
+
 		echo '</div>';
 		
 		
