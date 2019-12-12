@@ -83,6 +83,22 @@ echo '<title>'.$r['name'].'</title>';
 		echo '<input name="num" type=hidden value="'. $r['nat_num'] .'">';
 		echo '<input type=submit value="Edit this Pokemon">';
 		echo '</form>';
+		if(array_key_exists('del', $_POST)) {
+			delete_pokemon();
+		}
+
+		function delete_pokemon() {
+				echo "Hello world";
+		//THIS IS WHERE WE WRITE QUERY TO DELETE POKEMON
+		}
+		if(isset($_SESSION['username'])){
+				echo " <form method='post'>
+						<input type='submit' name='del' value='Delete'/>
+						</form>";
+		}
+		else{
+		}
+
 		echo '</div>';
 		
 		
