@@ -129,6 +129,7 @@ h4 {
 	      $query = "SELECT nat_num, name FROM Pokemon ORDER BY nat_num;" ;
 	     
 	  }
+	  print $query;
 		$r = mysqli_query($connection, $query);
 			
                         while($row=mysqli_fetch_array($r)){

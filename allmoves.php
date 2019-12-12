@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel=stylesheet href="pokemon_style.css"/>
+    <link rel="stylesheet" href='link.css'/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -75,22 +76,18 @@
             <p>Below is the table listing the moves pokemon are able to use in battle. To see more ingormation, click the link.</p>
         </div>
 
-        Sort By: <select>
-            <option value="name">Name</option>
-            <option value="type">Type</option>
-            <option value="base_power">Base Power</option>
-        </select>
+        
 
-        <form style="margin-left:150px;display:inline-block">
+        <form style="margin-left:150px;display:inline-block" method='post' action='allmoves.php'>
 
-            <input type="text" placeholder="Search..." style="margin-left:5px;">
+            <input type="text" placeholder="Search..." name='searchtext' style="margin-left:5px;">
             By
-            <select>
-                <option value="name">Name</option>
-                <option value="type">Type</option>
-                <option value="base_power">Base Power</option>
+            <select name='searchlist'>
+                <option value="name"<?php if($_POST['searchlist'] == 'name') echo ' selected="selected"'; ?>>Name</option>
+                <option value="movetype" <?php if($_POST['searchlist'] == 'movetype') echo ' selected="selected"'; ?>>Type</option>
+                <option value="base_power" <?php if($_POST['searchlist'] == 'base_power') echo ' selected="selected"'; ?>>Base Power</option>
             </select>
-            <input type="submit" value="Go">
+            <input type="submit" name='search' value="Go">
         </form>
 
         <div class="row">
@@ -107,15 +104,20 @@
 			<?php
 			if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
 			{} else { echo "No connection<br>"; }
+			if(isset($_POST['search']) && $_POST['searchlist']!='type'){
+			$query = "SELECT * from Moves WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['searchtext']  .  "%'" ;
 			
-			$query = "select * from Moves";
+			} else{
+			$query = "select * from Moves ORDER BY name";
+			}
+			print $query;
 			$moves = mysqli_query($connection, $query);
 			while ($m = mysqli_fetch_array($moves))
 			{
 				echo "<tr>";
 				echo "<td><form action=viewmove.php method=post>";
 				echo "<input type=hidden name=move value=\"" . $m['name'] . "\">";
-				echo "<input type=submit value=\"" . $m['name'] . "\">";
+				echo "<input type=submit class='link' value=\"" . $m['name'] . "\">";
 				echo "</form></td>";
 
 				echo "<td><span class=" . strtolower($m['movetype']) . ">" . $m['movetype'] . "</span></td>";

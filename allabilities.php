@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
        <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
-
+  <link href='link.css' rel="stylesheet"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -78,20 +78,13 @@
             <p>Below is the table listing the abilities pokemon are able to have. To see more information, click the link.</p>
         </div>
 
-        Sort By: <select>
-            <option value="name">Name</option>
+    
 
-        </select>
-
-        <form action="allabilities.php" method="post" name="s" id="search" style="margin-left:150px;display:inline-block">
+        <form action="allabilities.php" method="post" name="s" id="search" style="margin-left:320px;display:inline-block;">
 
             <input type="text" placeholder="Search..." name="search_text" style="margin-left:5px;">
-            By
-            <select name="searchlist" form="search">
-                <option value="name">Name</option>
-
-            </select>
-            <input type="submit" value="Go">
+        
+            <input type="submit" value="Go" name='search'>
         </form>
 
         <div class="row">
@@ -106,15 +99,18 @@
 			<?php
 		
 	if(isset($_POST['search'])) { 
-		$query = "SELECT name FROM Abilities WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['search_text'] . "%';";
-	}  else {
-              $query = "SELECT name FROM Abilities;" ;
+		
+		$query = "SELECT name FROM Abilities WHERE " . $_POST['searchlist'] . " name LIKE '%" . $_POST['search_text'] . "%' ORDER by name;";
+		
+		}  else {
+              $query = "SELECT name FROM Abilities ORDER BY name;" ;
+              
           }
                 $r = mysqli_query($connection, $query);
-				
+			//print $r;	
                         while($row=mysqli_fetch_array($r)){
                                 echo "<tr><form action='viewability.php' method='post'>";
-                                echo "<td><input type='submit' value=\"" . $row['name'] . "\"></td>";
+                                echo "<td><input type='submit' class='link' value=\"" . $row['name'] . "\"></td>";
                                 echo "<input type='hidden' name='ability' id='ability' value=\"".$row['name'] ."\"></form></tr>";
 			}
 			
