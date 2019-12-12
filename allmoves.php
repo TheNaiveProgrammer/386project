@@ -104,11 +104,16 @@
 			<?php
 			if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
 			{} else { echo "No connection<br>"; }
-			if(isset($_POST['search']) && $_POST['searchlist']!='type'){
-			$query = "SELECT * from Moves WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['searchtext']  .  "%'" ;
+			
+					
+			if(isset($_POST['home'])){
+			  $query = "SELECT * FROM Moves WHERE name LIKE '%" . $_POST['home_search']. "%';";
+	  
+			}else if(isset($_POST['search']) && $_POST['searchlist']!='type'){
+			  $query = "SELECT * from Moves WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['searchtext']  .  "%'" ;
 			
 			} else{
-			$query = "select * from Moves ORDER BY name";
+			  $query = "select * from Moves ORDER BY name";
 			}
 			//print $query;
 			$moves = mysqli_query($connection, $query);

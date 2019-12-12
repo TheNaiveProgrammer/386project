@@ -97,8 +97,11 @@
                     </thead>
 		    <tbody>
 			<?php
-		
-	if(isset($_POST['search'])) { 
+				
+	if(isset($_POST['home'])){
+	  $query = "SELECT * FROM Abilities WHERE name LIKE '%" . $_POST['home_search']. "%';";
+	  
+	} else if(isset($_POST['search'])) { 
 		
 		$query = "SELECT name FROM Abilities WHERE " . $_POST['searchlist'] . " name LIKE '%" . $_POST['search_text'] . "%' ORDER by name;";
 		
