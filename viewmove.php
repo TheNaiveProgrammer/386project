@@ -75,7 +75,39 @@ $r = mysqli_fetch_array(mysqli_query($connection, $query));
 	<p>Attack Mode: <span class=<?php echo strtolower($r['attack_mode']) . ">" . $r['attack_mode']; ?></span></p>
         <p><a href="editmove.php">Edit this Move</a></p>
         </div>
-		
+
+	<div class='movelist'>
+	
+	<center>
+	<table class=moves>
+	<caption><h3>Pokemon that can learn this move</h3></caption>
+	<tr>
+		<th>Name</th>
+		<th>Type</th>
+	</tr>
+
+	<?php
+	$query = "select P.nat_num, P.name from Pokemon as P, Can_Learn as L where P.nat_num = L.nat_num and L.move_name = \"" . $r['name'] . "\";";
+	$poke = mysqli_query($connection, $query);
+	while ($p = mysqli_fetch_array($poke))
+	{
+		echo "<tr>";
+		echo "<td><form action=viewpokemon.php method=post>";
+		echo "<input type=hidden name=poke value=" . $p['nat_num'] . "/>";
+		echo "<input type=submit value=\"" . $p['name'] . "\"/>";
+		echo "</form></td>";
+		$query = "select type from IsType where nat_num = " . $p['nat_num'] . ";";
+		$type = mysqli_query($connection, $query);
+		echo "<td>";
+		while ($t = mysqli_fetch_array($type))
+			echo "<span class=\"" . strtolower($t['type']) . "\">" . $t['type'] . "</span>";
+		echo "</td>";
+		echo "</tr>";
+	}
+	?>
+	</table>
+	</div>
+
 	</div>
 </body>
 <?php mysqli_close($connection); ?>

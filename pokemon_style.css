@@ -20,7 +20,8 @@ div.wrap {
 }
 
 div.pokedex-desc {
-	width: 75%;
+	width: 77%;
+	border: 2px solid;
 	float: left;
 	margin: auto;
 	padding: 5px;
@@ -29,6 +30,7 @@ div.pokedex-desc {
 div.poke-blurb {
 	margin: auto;
 	border: 2px solid;
+	height: 80%;
 	float: right;
 }
 
@@ -42,11 +44,17 @@ div.movelist {
 
 table {
 	border-collapse: collapse;
+	width: 30%;
 }
 
 table, td, th {
 	border: 1px solid;
 }
+
+td, th {
+	text-align: center;
+}
+
 
 .grass {
 	background-color: #00BF55;
