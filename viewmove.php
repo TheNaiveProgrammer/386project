@@ -77,7 +77,10 @@ $r = mysqli_fetch_array(mysqli_query($connection, $query));
 	?></p>
 	<p>Accuracy: <?php echo $r['accuracy']; ?></p>
 	<p>Attack Mode: <span class=<?php echo strtolower($r['attack_mode']) . ">" . $r['attack_mode']; ?></span></p>
-        <p><a href="editmove.php">Edit this Move</a></p>
+	<form action=editmove.php method=post>
+	<input type=submit value="Edit This Move"/>
+	<input type=hidden name=move value= "<?php echo $r['name']; ?>" />
+	</form>
 	<?php
 	if(array_key_exists('del', $_POST)) {
 	$query= "delete from Moves where name = \"" . $r['name'] . "\";";
@@ -92,7 +95,7 @@ $r = mysqli_fetch_array(mysqli_query($connection, $query));
 				echo " <form method='post'>
 						<input type='submit' value='Delete'/>
 						<input type='hidden' name='del' value='delete'/>
-						<input type='hidden' name='move' value='".$r['name']
+						<input type='hidden' name='move' value='". $r['name']
 						."'/></form>";
 		}
 
