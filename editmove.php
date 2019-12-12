@@ -1,6 +1,13 @@
 ﻿<html>
 <head>
-<title>Edit Thunderbolt</title>
+<?php
+if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
+{ } else { echo "No connection<br>"; }
+
+$query = "select * from Moves where name = \"" . $_POST['move'] . "\";";
+$m = mysqli_fetch_array
+?>
+<title>Edit </title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="pokemon_style.css">
       <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
@@ -29,26 +36,16 @@
 	<div class="wrap">
 	<form action="" method="post">
 		<span>Name: <input type="text" name="pokename" value="Thunderbolt"></span><br><br>
-		<span>Type: 
-			<select name="primarytype">
-				<option value="normal">Normal</option>
-				<option value="fire">Fire</option>
-				<option value="water">Water</option>
-				<option value="grass">Grass</option>
-				<option value="electric" selected="selected">Electric</option>
-				<option value="psychic">Psychic</option>
-				<option value="ice">Ice</option>
-				<option value="dragon">Dragon</option>
-				<option value="dark">Dark</option>
-				<option value="fairy">Fairy</option>
-				<option value="fighting">Fighting</option>
-				<option value="flying">Flying</option>
-				<option value="poison">Poison</option>
-				<option value="ground">Ground</option>
-				<option value="rock">Rock</option>
-				<option value="bug">Bug</option>
-				<option value="ghost">Ghost</option>
-				<option value="steel">Steel</option>
+		<span>Type:
+			<select>
+			<?php
+			$query = "select * from Types;";
+			$type = mysqli_query($connection, $query);
+			while ($t = mysqli_fetch_array($type))
+			{
+				echo "<option value=\"".$t['name']."\">" . $t['name'] . "</option>";
+			}
+			?> 
 			</select>
 		</span><br><br>
 
