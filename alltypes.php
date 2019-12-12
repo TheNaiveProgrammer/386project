@@ -1,9 +1,18 @@
 ﻿<html>
 <head>
 
+<?php
+if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
+{ } else { echo "No connection"; }
+
+$query = "select * from Types";
+$types = mysqli_query($connection, $query);
+?>
+
     <title>All Types</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="pokemon_style.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -101,31 +110,40 @@
 
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td scope="row"><a href="viewtype.php">Electric</a></td>
+		    <tbody>
+			<?php
+			while ($t = mysqli_fetch_array($types))
+			{
+				echo "<tr>";
+				echo "<td><form action=viewtype.php method=post>";
+				echo "<input type=submit value=\"" . $t['name'] . "\">";
+				echo "<input type=hidden name=type value=\"" . $t['name'] . "\">";
+				echo "</form></td>";
+				$query = "select defending from Strong_Against where attacking = \"" . $t['name'] . "\";";
+				$SA = mysqli_query($connection, $query);
+				echo "<td>";
+				while ($sa = mysqli_fetch_array($SA))
+				{
+					echo "<span class=\"" . strtolower($sa['defending']) . "\">" . $sa['defending'] . "</span>";
+				}
+				echo "</td>";
+				echo "<td>";
 
-                            <td>Water, Flying</td>
-                            <td>Ground</td>
-
-                        </tr>
-                        <tr>
-                            <td scope="row"><a href="#">Grass</a></td>
-                            <td>Water, Ground, Rock</td>
-                            <td>Fire, Flying, Bug </td>
-
-                        </tr>
-                        <tr>
-                            <td scope="row"><a href="#">Water</a></td>
-                            <td>Fire, Ground, Rock</td>
-                            <td>Electric, Grass</td>
-
-                        </tr>
+				$query = "select defending from Weak_Against where attacking = \"" . $t['name'] . "\";";
+				$WA = mysqli_query($connection, $query);
+				while ($wa = mysqli_fetch_array($WA))
+					echo "<span class=\"" . strtolower($wa['defending']) . "\">" . $wa['defending'] . "</span>";
+				echo "</td>";
+				echo "</tr>";
+			}
+			?>
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+<?php mysqli_close($connection); ?>
 
 </body>
 </html>

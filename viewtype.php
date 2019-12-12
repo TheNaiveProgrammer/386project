@@ -1,7 +1,13 @@
 ﻿<html>
 <head>
+<?php
+if ($connection = mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
+{ } else { echo "No connection"; }
 
-<title>Electric</title>
+$query = "select * from Types where name = \"" . $_POST['type'] . "\";";
+$type = mysqli_fetch_array(mysqli_query($connection, $query));
+?>
+<title><?php echo $type['name']; ?></title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="pokemon_style.css" />
       <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
@@ -33,15 +39,11 @@
 	<div class="wrap">
 		
 		<div class="pokedex-desc">
-		<h3> Type Description </h3>
-		<p>The Electric type is one of the eighteen types. Prior to changes in Generation IV, all damaging Electric-type moves were special, but they may now also be physical depending on the attack. </p>
         </div>
         
         <div class="poke-blurb">
-        <img src="Electric-main.jpg" class="poke">
-		<h3>Electric Type</h3>
-		<p>Strong Against: Water, Flying</p>
-        <p>Weak Against: Ground</p>
+	<h3><?php echo $type['name']; ?> Type</h3>
+	
         <p><a href="edittype.php">Edit this Type</a></p>
         </div>
 		
