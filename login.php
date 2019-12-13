@@ -49,7 +49,7 @@
 if(isset($_POST['uname']) && isset($_POST['psw'])){
 
     $query = "SELECT * FROM Accounts WHERE username = '" . $_POST['uname'] . "' AND pass= '" . $_POST['psw'] . "'; " ;
-    print $query;
+    //print $query;
   $r = mysqli_query($connection, $query);
   $row=mysqli_fetch_array($r);
    
