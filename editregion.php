@@ -1,4 +1,8 @@
-﻿<html>
+﻿<?php
+	if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
+	{ } else { echo "No connection"; }
+?>
+<html>
 <head>
 <title>Edit Hoenn</title>
 <meta charset="utf-8">
@@ -6,6 +10,19 @@
       <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
 
 
+      
+      <?php
+      if(isset($_POST['sub'])){
+	$q = "UPDATE Region SET generation = " . $_POST['generation'] . ", description = '" . $_POST['description'] . "' WHERE name = '" . $_POST['n'] . "';";
+	//print $q;
+	mysqli_query($connection, $q);
+		$query = "select * from Region where name = \"" . $_POST['n'] . "\";";
+	$r = mysqli_fetch_array(mysqli_query($connection, $query));
+	} else {
+		$query = "select * from Region where name = \"" . $_POST['name'] . "\";";
+	$r = mysqli_fetch_array(mysqli_query($connection, $query));
+	}
+      ?>
 </head>	
 
 
@@ -27,19 +44,18 @@
 
 <body>
 	<?php
-	if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
-	{ } else { echo "No connection"; }
-	$query = "select * from Region where name = \"" . $_POST['name'] . "\";";
-	$r = mysqli_fetch_array(mysqli_query($connection, $query));
+
+
 	?>
 
 	<div class="wrap">
 	<br>
-	<form action="viewregion.php" method="post">
+	<form action="editregion.php" method="post">
 		<span>Name: <?php echo $r['name']?></span><br><br>
-		<span>Generation: <input type=text name=height value=<?php echo $r['generation'];?>></span><br><br>
-		<span>Region Description: <br> <textarea rows=5 style="resize:none;" cols=40 ><?php echo $r['description']; ?></textarea></span><br><br>
-		<input type=submit value=Submit>
+		<span>Generation: <input type=text name=generation value=<?php echo $r['generation'];?>></span><br><br>
+		<span>Region Description: <br> <textarea rows=5 style="resize:none;" name="description" cols=40 ><?php echo $r['description']; ?></textarea></span><br><br>
+		<input type=hidden name="n" value=<?php echo "\"" . $r['name'] . "\"" ?>>
+		<input type=submit name="sub" value=Submit>
 	</form>
 	
 	<br><br>
