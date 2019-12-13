@@ -1,4 +1,8 @@
-﻿<html>
+﻿<?php
+session_start()
+?>
+
+<html>
 <head>
 
 <title>Hoenn</title>
@@ -45,7 +49,27 @@
         <h3><?php echo $r['name']; ?> Region</h3>
         <p>Generation: <?php echo $r['generation'] ?></p>
         <p><a href="editregion.php">Edit this Region</a></p>
-        </div>
+	<?php
+	if(array_key_exists('del', $_POST)) {
+		$query= "delete from Region where name = \"" . $r['name'] . "\";";
+		if (mysqli_query($connection, $query))
+		{ 
+			mysqli_close($connection);
+			header("Location: allregions.php");
+		} else { echo "ERROR DELETING<br>" . $query; }
+		//THIS IS WHERE WE WRITE QUERY TO DELETE POKEMON
+		}
+		if(isset($_SESSION['username'])){
+			echo " <form method='post'>
+				<input type='submit' value='Delete'/>
+				<input type='hidden' name='del' value='delete'/>
+				<input type='hidden' name='name' value='".$r['name']
+				."'/></form>";
+		}
+		else{
+		}
+	?>
+	</div>
 		
 	</div>
 </body>
