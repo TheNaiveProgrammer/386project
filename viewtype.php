@@ -16,6 +16,32 @@ $type = mysqli_fetch_array(mysqli_query($connection, $query));
 <link rel="stylesheet" href="pokemon_style.css" />
       <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
 
+<style>
+.left {
+	float: left;
+	padding: 15%;
+}
+
+.right {
+	float: right;
+	padding: 15%;
+}
+
+.strong {
+	background-color: #147333;
+	color: #EEEEEE;
+}
+
+.weak {
+	background-color: #de3400;
+	color: #EEEEEE;
+}
+
+th {
+	width: 25%;
+}
+</style>
+
 </head>
 
 
@@ -41,9 +67,6 @@ $type = mysqli_fetch_array(mysqli_query($connection, $query));
 
 
 	<div class="wrap">
-		
-		<div class="pokedex-desc">
-        </div>
         
         <div class="poke-blurb">
 	<h3><?php echo $type['name']; ?> Type</h3>
@@ -75,14 +98,68 @@ $type = mysqli_fetch_array(mysqli_query($connection, $query));
 
 	</div>
 
-	<div style="float:left;">
+	<div class=left>
 	<table>
 	<caption><h3>Offensive</h3></caption>
 	<tr>
+		<th>Strength</th>
 		<th>Type</th>
+	</tr>
+	<?php
+		$query = "select defending from Strong_Against where attacking = \"" . $type['name'] . "\";";
+		$SA = mysqli_query($connection, $query);
+		while ($sa = mysqli_fetch_array($SA))
+		{
+			echo "<tr>";
+			echo "<td class=strong>";
+			echo "x2";
+			echo "</td>";
+			echo "<td class=\"".strtolower($sa['defending'])."\">";
+			echo $sa['defending'];
+			echo "</td></tr>";
+		}
+		$query = "select defending from Weak_Against where attacking = \"" . $type['name'] . "\";";
+		$WA = mysqli_query($connection, $query);
+		while ($wa = mysqli_fetch_array($WA))
+		{
+			echo "<tr>";
+			echo "<td class=weak>x1/2</td>";
+			echo "<td class = \"".strtolower($wa['defending'])."\">";
+			echo $wa['defending'];
+			echo "</td></tr>";
+		}
+	?>
 	</table>
 	</div>
-		
+
+	<div class=right>
+	<table>
+	<caption><h3>Defensive</h3></caption>
+	<tr>
+		<th>Strength</th>
+		<th>Type</th>
+	</tr>
+	<?php
+		$query = "select attacking from Strong_Against where defending = \"" .$type['name'] . "\";";
+		$SA = mysqli_query($connection, $query);
+		while ($sa = mysqli_fetch_array($SA))
+		{
+			echo "<tr><td class=weak>x2</td>";
+			echo "<td class=\"" . strtolower($sa['attacking']) . "\">";
+			echo $sa['attacking'];
+			echo "</td></tr>";
+		}
+		$query = "select attacking from Weak_Against where defending = \"" .$type['name'] . "\"";
+		$WA = mysqli_query($connection, $query);
+		while ($wa = mysqli_fetch_array($WA))
+		{
+			echo "<tr><td class=strong>x1/2</td>";
+			echo "<td class=\"" . strtolower($wa['attacking']) . "\">";
+			echo $wa['attacking'];
+			echo "</td></tr>";
+		}
+	?>
+	</table>	
 	</div>
 </body>
 
