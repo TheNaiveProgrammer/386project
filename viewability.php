@@ -42,6 +42,7 @@ session_start()
 	<div class="wrap">
 		
 		<div class="pokedex-desc">
+		<a href = "index.php">Back to Menu</a>
 		<h3> Ability Effect</h3>
 		<p><?php echo $r['description']; ?></p>
 		<br>
