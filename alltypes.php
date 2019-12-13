@@ -124,7 +124,7 @@ if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
 				echo "<input type=submit class='link' value=\"" . $t['name'] . "\">";
 				echo "<input type=hidden name=type value=\"" . $t['name'] . "\">";
 				echo "</form></td>";
-				$query = "select defending from Strong_Against where attacking = \"" . $t['name'] . "\";";
+				$query = "select defending from Strong_Against where attacking = \"" . $t['name'] . "\" order by defending;";
 				$SA = mysqli_query($connection, $query);
 				echo "<td>";
 				while ($sa = mysqli_fetch_array($SA))
@@ -134,7 +134,7 @@ if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
 				echo "</td>";
 				echo "<td>";
 
-				$query = "select defending from Weak_Against where attacking = \"" . $t['name'] . "\";";
+				$query = "select defending from Weak_Against where attacking = \"" . $t['name'] . "\" order by defending;";
 				$WA = mysqli_query($connection, $query);
 				while ($wa = mysqli_fetch_array($WA))
 					echo "<span class=\"" . strtolower($wa['defending']) . "\">" . $wa['defending'] . "</span>";
