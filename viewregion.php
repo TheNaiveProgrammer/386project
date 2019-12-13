@@ -1,10 +1,16 @@
 ﻿<?php
 session_start();
+if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
+	{} else { echo "no connection"; }
+	$query = "SELECT * FROM Region WHERE name='" . $_POST['name'] . "';";
+	//print $query;
+	
+	$r = mysqli_fetch_array(mysqli_query($connection, $query));
 ?>
 <html>
 <head>
 
-<title>Hoenn</title>
+<title><?php echo $r['name'] ?></title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="pokemon_style.css" />
       <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
@@ -27,20 +33,21 @@ session_start();
 </main>
 
 <body>
-<?php
-	if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
-	{} else { echo "no connection"; }
-	$query = "SELECT * FROM Region WHERE name='" . $_POST['name'] . "';";
-	//print $query;
-	
-	$r = mysqli_fetch_array(mysqli_query($connection, $query));
-?>
 
 	<div class="wrap">
 		
 		<div class="pokedex-desc">
+		<a href="index.php">Back to Menu</a>
+		<?php
+		if(isset($_SESSION['username'])){
+		      echo "<span  style='float:right;'> Username: " . $_SESSION['username'] . "</span>" ;
+		  
+		} else {
+		echo "<a href='login.php' style='float:right;'>Admin Login</a>";
+		}
+		?>	
 		<h3> Region Description</h3>
-		<p><?php echo $_POST['description']; ?></p>
+		<p><?php echo $r['description']; ?></p>
         </div>
         
         <div class="poke-blurb">
@@ -53,6 +60,29 @@ session_start();
 		echo '<input type=submit value="Edit this Region">';
 		echo '</form>';
         ?></p>
+        
+        <?php
+        if(array_key_exists('del', $_POST)) {
+                $query= "delete from Region where name = \"" . $r['name'] . "\";";
+                if (mysqli_query($connection, $query))
+                {
+                        mysqli_close($connection);
+                        header("Location: allregions.php");
+                } else { echo "ERROR DELETING<br>" . $query; }
+                //THIS IS WHERE WE WRITE QUERY TO DELETE POKEMON
+                }
+                if(isset($_SESSION['username'])){
+                        echo " <form method='post'>
+                                <input type='submit' value='Delete'/>
+                                <input type='hidden' name='del' value='delete'/>
+                                <input type='hidden' name='name' value='".$r['name']
+                                ."'/></form>";
+                }
+                else{
+                }
+        ?>
+
+
         
         
         </div>

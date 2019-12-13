@@ -39,8 +39,15 @@
 		<span>Generation: <input type=text name=height value=<?php echo $r['generation'];?>></span><br><br>
 		<span>Region Description: <br> <textarea rows=5 style="resize:none;" cols=40 ><?php echo $r['description']; ?></textarea></span><br><br>
 		<input type=submit value=Submit>
-	</form><br><br>
-	<a href="viewregion.php">Go Back</a>
+	</form>
+	
+	<br><br>
+	
+	
+	<form action="viewregion.php" method=post>
+	<input type=submit value="Go back">
+	<input type=hidden name=name value=<?php echo "\"" . $r['name'] . "\"" ?>>
+	</form>
 	
 	</div>
 </body>
