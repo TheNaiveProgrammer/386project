@@ -1,11 +1,18 @@
-﻿<html>
+﻿
+
+<?php
+  session_start();
+  if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
+	{ } else { echo "No connection"; }
+?>
+<html>
 <head>
 
 <title>All Regions</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-  <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
+  <link href="link.css" rel="stylesheet" type="text/css" /> 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
@@ -70,21 +77,18 @@ h4 {
             <p>Below is the table listing the Pokemon Regions in our database. To see more detailed information, links area provided in each row. </p>
         </div>
 
-        Sort By: <select>
-            <option value="name">Name</option>
-            <option value="generation">Generation</option>
-        </select>
+    
 
-        <form style="margin-left:150px;display:inline-block">
+        <form style="margin-left:150px;display:inline-block" method='post' action='allregions.php'>
 
-            <input type="text" placeholder="Search..." style="margin-left:5px;">
+            <input type="text" placeholder="Search..." name='searchtext' style="margin-left:5px;">
             By
-            <select>
-                <option value="name">Name</option>
-                <option value="type">Generation</option>
+            <select name="searchlist">
+                <option value="name" <?php if($_POST['searchlist'] == 'name') echo ' selected="selected"'; ?>>Name</option>
+                <option value="generation" <?php if($_POST['searchlist'] == 'generation') echo ' selected="selected"'; ?>>Generation</option>
                
             </select>
-            <input type="submit" value="Go">
+            <input type="submit" name="search" value="Go">
         </form>
 
         <div class="row">
@@ -98,17 +102,28 @@ h4 {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td scope="row"><a href="viewregion.php">Hoenn</a></td>
-
-                            <td>3</td>
-
-                        </tr>
-                        <tr>
-                            <td scope="row"><a href="#">Kanto</a></td>
-                            <td>1</td>
-
-                        </tr>
+                    <?php
+                    if(isset($_POST['home'])){
+			  $query = "SELECT * FROM Region WHERE name LIKE '%" . $_POST['home_search']. "%';";
+	  
+			}else if(isset($_POST['search'])){
+			  $query = "SELECT * from Region WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['searchtext']  .  "%'" ;
+			
+			} else{
+			  $query = "select * from Region ORDER BY name";
+			}
+			//print $query;
+                  $r = mysqli_query($connection, $query);
+			
+                        while($row=mysqli_fetch_array($r)){
+                                echo "<tr><form action='viewregion.php' method='post'>";
+				echo "<td><input type='submit' class='link' value=" . $row['name'] . "></td>";
+				
+				echo "<input type='hidden' name='name'  value=".$row['name'] ."></form>";
+				echo "<td>" . $row['generation'] . "</td></tr>";
+			} 
+			mysqli_close($connection);
+                        ?>
                     </tbody>
                 </table>
             </div>
