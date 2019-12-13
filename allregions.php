@@ -104,13 +104,13 @@ h4 {
                     <tbody>
                     <?php
                     if(isset($_POST['home'])){
-			  $query = "SELECT * FROM Region WHERE name LIKE '%" . $_POST['home_search']. "%';";
+			  $query = "SELECT * FROM Region WHERE name LIKE '%" . $_POST['home_search']. "%' ORDER BY generation;";
 	  
 			}else if(isset($_POST['search'])){
-			  $query = "SELECT * from Region WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['searchtext']  .  "%'" ;
+			  $query = "SELECT * from Region WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['searchtext']  .  "%' ORDER BY generation" ;
 			
 			} else{
-			  $query = "select * from Region ORDER BY name";
+			  $query = "select * from Region ORDER BY generation";
 			}
 			//print $query;
                   $r = mysqli_query($connection, $query);
