@@ -7,7 +7,32 @@ if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
 
 if (isset($_POST['query']))
 {
-	
+	$query = "delete from Strong_Against where attacking = \"" . $_POST['type'] . "\";";
+	mysqli_query($connection, $query);
+	$query = "delete from Weak_Against where attacking = \"" . $_POST['type'] . "\";";
+	mysqli_query($connection, $query);
+	$strong = explode(",", $_POST['sa']);
+	$i = 0;
+	while ($i < count($strong))
+	{	
+		$str = str_replace(' ', '', $strong[$i]);
+
+		$query = "insert into Strong_Against values (\"" . $_POST['type'] . "\", \"" . $str . "\");";
+		mysqli_query($connection, $query);
+		$i = $i + 1;
+	}
+
+	$weak = explode(",", $_POST['wa']);
+	$i = 0;
+	while ($i < count($weak))
+	{
+		$str = str_replace(' ', '', $weak[$i]);
+
+		$query = "insert into Weak_Against values (\"" . $_POST['type'] . "\", \"" . $str . "\");";
+		mysqli_query($connection, $query);
+
+		$i = $i + 1;
+	}
 }
 
 
@@ -72,8 +97,10 @@ $type = mysqli_fetch_array(mysqli_query($connection, $query));
 		?>"><span><br><br>
 		<input type=submit value=Submit>
 	</form><br><br>
-	<a href="viewtype.php">Go Back</a>
-	
+	<form action=viewtype.php method=post>
+	<input type = hidden name=type value="<?php echo $type['name']; ?>"/>
+	<input type=submit value="Go Back" />
+	</form>
 	</div>
 	<?php mysqli_close($connection); ?>
 </body>
