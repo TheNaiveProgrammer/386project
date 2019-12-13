@@ -148,6 +148,9 @@ echo '<title>'.$r['name'].'</title>';
 			}
 			?>
 			</table>
+			<form action=moveset.php method=post>
+			<input type=hidden name=poke value="<?php echo $r['nat_num']; ?>">
+			<input type=submit value="Edit Moveset">
 			</center>
 		</div>
 	</div>
