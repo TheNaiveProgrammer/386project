@@ -48,6 +48,7 @@ $r = mysqli_fetch_array(mysqli_query($connection, $query));
 	<div class="wrap">
 		
 		<div class="pokedex-desc">
+		<a href = "index.php">Back to Menu</a>
 		<h3> Move Effects</h3>
 		<p>
 		<?php
