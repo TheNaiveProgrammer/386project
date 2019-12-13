@@ -119,7 +119,7 @@ h4 {
                                 echo "<tr><form action='viewregion.php' method='post'>";
 				echo "<td><input type='submit' class='link' value=" . $row['name'] . "></td>";
 				
-				echo "<input type='hidden' name='poke' id='poke' value=".$row['name'] ."></form>";
+				echo "<input type='hidden' name='name'  value=".$row['name'] ."></form>";
 				echo "<td>" . $row['generation'] . "</td></tr>";
 			} 
 			mysqli_close($connection);
