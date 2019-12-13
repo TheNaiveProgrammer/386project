@@ -34,8 +34,9 @@
 	?>
 
 	<div class="wrap">
-	<form action="" method="post">
-		<span>Name: <input type="text" name="pokename" value=<?php echo $r['name']?>></span><br><br>
+	<br>
+	<form action="viewregion.php" method="post">
+		<span>Name: <?php echo $r['name']?></span><br><br>
 		<span>Generation: <input type=text name=height value=<?php echo $r['generation'];?>></span><br><br>
 		<span>Region Description: <br> <textarea rows=5 style="resize:none;" cols=40 ><?php echo $r['description']; ?></textarea></span><br><br>
 		<input type=submit value=Submit>

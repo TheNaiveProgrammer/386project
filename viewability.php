@@ -1,14 +1,20 @@
 ﻿<?php
-session_start()
+session_start();
+if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
+	{} else { echo "no connection"; }
+	$query = "select * from Abilities where name = \"" . $_POST['ability'] . "\";";
+	
+       	$r = mysqli_fetch_array(mysqli_query($connection, $query));	
 ?>
 
 <html>
 <head>
 
-<title>Flash Fire</title>
+<title><?php echo $r['name'] ?></title>
 <meta charset="utf-8">
 <link rel="stylesheet" href="pokemon_style.css" />
 <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
+<link rel="stylesheet" href="link.css" />
 
 </head>
 
@@ -32,25 +38,11 @@ session_start()
 
 
 <body>
-<?php
-	if ($connection = @mysqli_connect('localhost', 'pmouw1', 'pmouw1', 'PokemonDB'))
-	{} else { echo "no connection"; }
-	$query = "select * from Abilities where name = \"" . $_POST['ability'] . "\";";
-	
-       	$r = mysqli_fetch_array(mysqli_query($connection, $query));	
-?>
+
 	<div class="wrap">
 		
 		<div class="pokedex-desc">
 		<a href = "index.php">Back to Menu</a>
-		<?php
-		if(isset($_SESSION['username'])){
-		      echo "<span  style='float:right;'> Username: " . $_SESSION['username'] . "</span>" ;
-		  
-		} else {
-		echo "<a href='login.php' style='float:right;'>Admin Login</a>";
-		}
-		?>
 		<h3> Ability Effect</h3>
 		<p><?php echo $r['description']; ?></p>
 		<br>
@@ -102,7 +94,7 @@ session_start()
 			echo "<td>";
 			echo "<form method=post action=viewpokemon.php>";
 			echo "<input type=hidden name=poke value=\"" . $p['nat_num'] . "\">";
-			echo "<input type=submit value=\"" .$p['name'] . "\">";
+			echo "<input class='link' type=submit value=\"" .$p['name'] . "\">";
 			echo "</form>";
 		       	echo "</td>";
 			$query = "select type from IsType where nat_num = " . $p['nat_num'] . ";";

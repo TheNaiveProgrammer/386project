@@ -17,7 +17,7 @@ $r = mysqli_fetch_array(mysqli_query($connection, $query));
 <meta charset="utf-8">
 <link rel="stylesheet" href="pokemon_style.css" />
       <link href="sidebar_them.css" rel="stylesheet" type="text/css" /> 
-
+ <link href="link.css" rel="stylesheet" type="text/css" /> 
 </head>
 
 
@@ -128,7 +128,7 @@ $r = mysqli_fetch_array(mysqli_query($connection, $query));
 		echo "<tr>";
 		echo "<td><form action=viewpokemon.php method=post>";
 		echo "<input type=hidden name=poke value=" . $p['nat_num'] . "/>";
-		echo "<input type=submit value=\"" . $p['name'] . "\"/>";
+		echo "<input class='link' type=submit value=\"" . $p['name'] . "\"/>";
 		echo "</form></td>";
 		$query = "select type from IsType where nat_num = " . $p['nat_num'] . ";";
 		$type = mysqli_query($connection, $query);
