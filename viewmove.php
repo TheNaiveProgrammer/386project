@@ -49,6 +49,14 @@ $r = mysqli_fetch_array(mysqli_query($connection, $query));
 		
 		<div class="pokedex-desc">
 		<a href = "index.php">Back to Menu</a>
+		<?php
+		if(isset($_SESSION['username'])){
+		      echo "<span  style='float:right;'> Username: " . $_SESSION['username'] . "</span>" ;
+		  
+		} else {
+		echo "<a href='login.php' style='float:right;'>Admin Login</a>";
+		}
+		?>
 		<h3> Move Effects</h3>
 		<p>
 		<?php
