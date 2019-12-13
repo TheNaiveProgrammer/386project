@@ -19,12 +19,12 @@ $type = mysqli_fetch_array(mysqli_query($connection, $query));
 <style>
 .left {
 	float: left;
-	padding: 15%;
+	padding-left: 10%;
 }
 
 .right {
 	float: right;
-	padding: 15%;
+	padding-right: 10%;
 }
 
 .strong {
@@ -35,10 +35,6 @@ $type = mysqli_fetch_array(mysqli_query($connection, $query));
 .weak {
 	background-color: #de3400;
 	color: #EEEEEE;
-}
-
-th {
-	width: 25%;
 }
 </style>
 
