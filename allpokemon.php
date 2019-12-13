@@ -130,7 +130,7 @@ h4 {
 	    	    
 	   $query = "SELECT nat_num, name FROM Pokemon WHERE " . $_POST['searchlist'] . " LIKE '%" . $_POST['search_text'] . "%' ORDER BY nat_num";
 	}else if(isset($_POST['search']) && $_POST['searchlist'] == "type"){
-	  $query = "SELECT P.nat_num, P.name from Pokemon as P, IsType as T where P.nat_num = T.nat_num and T.type like \"%" . $_POST['search_text'] . "%\";";
+	  $query = "SELECT P.nat_num, P.name from Pokemon as P, IsType as T where P.nat_num = T.nat_num and T.type like \"%" . $_POST['search_text'] . "%\" GROUP BY P.nat_num;";
 	}else {
 	      $query = "SELECT nat_num, name FROM Pokemon ORDER BY nat_num;" ;
 	     

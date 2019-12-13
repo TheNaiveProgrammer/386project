@@ -1,4 +1,7 @@
-﻿<html>
+﻿<?php
+session_start();
+?>
+<html>
 <head>
 
 <title>Hoenn</title>
@@ -44,7 +47,14 @@
         
         <h3><?php echo $r['name']; ?> Region</h3>
         <p>Generation: <?php echo $r['generation'] ?></p>
-        <p><a href="editregion.php">Edit this Region</a></p>
+        <p><?php
+        echo '<form action=editregion.php method=POST>';
+		echo '<input name="name" type=hidden value="'. $r['name'] .'">';
+		echo '<input type=submit value="Edit this Region">';
+		echo '</form>';
+        ?></p>
+        
+        
         </div>
 		
 	</div>

@@ -155,10 +155,12 @@ if($connection = @mysqli_connect('localhost','lmartin9', 'Ballislife93!', 'Pokem
 
             <br>
 
+	    <span> Description: <br> <textarea name="desc" style ="resize:none;" rows=5 cols=40></textarea></span>
 
 
-
-
+	    <br>
+	    <br>
+	    <br>
 
             <input onclick="return check(1)" type="submit" value="Submit">
 

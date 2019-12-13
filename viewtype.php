@@ -95,6 +95,7 @@ $type = mysqli_fetch_array(mysqli_query($connection, $query));
 	</div>
 
 	<div class=left>
+	<a href="index.php">Back to Menu</a>
 	<table>
 	<caption><h3>Offensive</h3></caption>
 	<tr>
@@ -135,6 +136,14 @@ $type = mysqli_fetch_array(mysqli_query($connection, $query));
 		<th>Strength</th>
 		<th>Type</th>
 	</tr>
+	<?php	
+		if(isset($_SESSION['username'])){
+		      echo "<span  style='float:right;'> Username: " . $_SESSION['username'] . "</span>" ;
+		  
+		} else {
+		echo "<a href='login.php' style='float:right;'>Admin Login</a>";
+		}
+	?>
 	<?php
 		$query = "select attacking from Strong_Against where defending = \"" .$type['name'] . "\";";
 		$SA = mysqli_query($connection, $query);

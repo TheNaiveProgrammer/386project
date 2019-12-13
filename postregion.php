@@ -5,7 +5,7 @@
 <link href="post.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
- <div id="first">
+ <div id="post">
         <div style="width:20%;display:inline-block;  float:left;">
             <ul style=" list-style-type:none;">
                 <li><a href="allpokemon.php">Pokemon </a></li>
@@ -14,8 +14,6 @@
                 <li><a href="allmoves.php">Moves </a></li>
                 <li><a href="allabilities.php">Abilities</a></li>
                 <li><a href="alltypes.php">Types</a></li>
-                <li><a href="#">Random page </a></li>
-                <li><a href="#">News </a></li>
             </ul>
         </div>
 
@@ -28,7 +26,7 @@ if($connection = @mysqli_connect('localhost','lmartin9', 'Ballislife93!', 'Pokem
 		}
 		
 		
-		$query = "INSERT INTO Region(name,generation) VALUES ('" . $_POST["name"] . "', " . $_POST["gen"] . ");";
+		$query = "INSERT INTO Region(name,generation,description) VALUES ('" . $_POST["name"] . "', " . $_POST["gen"] . ", '" . addslashes($_POST["desc"]) ."');";
 		  		//print $query;
 
 		if(mysqli_query($connection, $query)){
