@@ -73,7 +73,15 @@ $type = mysqli_fetch_array(mysqli_query($connection, $query));
 	?>
 
 
-        </div>
+	</div>
+
+	<div style="float:left;">
+	<table>
+	<caption><h3>Offensive</h3></caption>
+	<tr>
+		<th>Type</th>
+	</table>
+	</div>
 		
 	</div>
 </body>
