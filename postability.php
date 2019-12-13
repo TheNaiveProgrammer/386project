@@ -5,7 +5,7 @@
 <link href="post.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
- <div id="first">
+ <div id="post">
         <div style="width:20%;display:inline-block;  float:left;">
             <ul style=" list-style-type:none;">
                 <li><a href="allpokemon.php">Pokemon </a></li>
