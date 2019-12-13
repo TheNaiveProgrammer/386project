@@ -26,7 +26,7 @@ if($connection = @mysqli_connect('localhost','lmartin9', 'Ballislife93!', 'Pokem
 		}
 		
 		
-		$query = "INSERT INTO Region(name,generation) VALUES ('" . $_POST["name"] . "', " . $_POST["gen"] . ");";
+		$query = "INSERT INTO Region(name,generation,description) VALUES ('" . $_POST["name"] . "', " . $_POST["gen"] . ", '" . addslashes($_POST["desc"]) ."');";
 		  		//print $query;
 
 		if(mysqli_query($connection, $query)){
